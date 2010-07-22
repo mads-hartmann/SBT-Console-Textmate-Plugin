@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'Terminal' target in the 'Terminal' project.
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
