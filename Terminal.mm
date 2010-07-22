@@ -14,7 +14,7 @@
 
 @implementation Terminal
 
-@synthesize lastWindowController;
+@synthesize lastWindowController, lastTerminalWindowController;
 
 static Terminal *sharedInstance = nil;
 
@@ -39,12 +39,8 @@ static Terminal *sharedInstance = nil;
 		iVars = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
 		
 		[OakWindow jr_swizzleMethod:@selector(becomeMainWindow) withMethod:@selector(T_becomeMainWindow) error:NULL];
-		[OakProjectController jr_swizzleMethod:@selector(windowDidLoad) withMethod:@selector(T_windowDidLoad) error:NULL];
-		
-//		TerminalWindowController* obj = [TerminalWindowController alloc]; 
-//		NSString* nibPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"Terminal" ofType:@"nib"];
-//		terminalWindowController = [obj initWithWindowNibPath:nibPath owner:obj];
-		
+		[OakProjectController jr_swizzleMethod:@selector(windowDidLoad) withMethod:@selector(T_windowDidLoad) error:NULL];		
+		[OakDocumentController jr_swizzleMethod:@selector(windowDidLoad) withMethod:@selector(T_windowDidLoad) error:NULL];		
 	}
 	sharedInstance = self;
 	return self;
@@ -72,32 +68,59 @@ static Terminal *sharedInstance = nil;
 
 - (void)installMenuItem
 {
+	NSLog(@"istalling");
 	if(windowMenu = [[[[NSApp mainMenu] itemWithTitle:@"View"] submenu] retain])
 	{
 		NSArray* items = [windowMenu itemArray];
-		
+		NSLog(@"test");
 		int index = 0;
 		for (NSMenuItem* item in items)
 		{
 			if ([[item title] isEqualToString:@"Show/Hide Project Drawer"])
 			{
+				NSLog(@"%@",[item title]);
 				index = [items indexOfObject:item]+1;
 			}
 		}
-		showTerminalMenuItem = [[NSMenuItem alloc] initWithTitle:@"Show/Hide Terminal" 
-														 action:@selector(showTerminal:) keyEquivalent:@""];
-		[showTerminalMenuItem setKeyEquivalent:@"$"];
-		[showTerminalMenuItem setKeyEquivalentModifierMask:NSCommandKeyMask];
-		[showTerminalMenuItem setTarget:self];
-		[showTerminalMenuItem setEnabled:true];
-		[windowMenu insertItem:showTerminalMenuItem atIndex:index];
 		
+		// create the items
+		showTerminalMenuItem = [[NSMenuItem alloc] initWithTitle:@"Show/Hide Terminal" 
+														  action:@selector(toggleTerminal:) keyEquivalent:@""];
+		[showTerminalMenuItem setKeyEquivalent:@"$"];
+		[showTerminalMenuItem setKeyEquivalentModifierMask:NSShiftKeyMask|NSCommandKeyMask];
+		[showTerminalMenuItem setTarget:self];
+		[showTerminalMenuItem setHidden:YES];
+		
+		toggleTerminalfocus = [[NSMenuItem alloc] initWithTitle:@"Toggle Terminal Foucs" 
+														 action:@selector(toggleTerminalFocus:) keyEquivalent:@""];
+		[toggleTerminalfocus setKeyEquivalent:@"$"];
+		[toggleTerminalfocus setKeyEquivalentModifierMask:NSCommandKeyMask];
+		[toggleTerminalfocus setTarget:self];
+		[toggleTerminalfocus setHidden:YES];
+		
+		//terminalItem = [[NSMenuItem alloc] initWithTitle:@"Terminal" action:nil keyEquivalent:nil];
+		
+		// creat the menu
+		//terminalMenu = [[NSMenu alloc] initWithTitle:@"Terminal"];
+		//[terminalMenu addItem:showTerminalMenuItem];
+		//[terminalMenu addItem:toggleTerminalfocus];
+		
+		// add the menu
+		//[windowMenu setSubmenu:terminalMenu forItem:terminalItem];
+		//[windowMenu insertItem:terminalItem atIndex:index];
+		[windowMenu insertItem:toggleTerminalfocus atIndex:index];
+		[windowMenu insertItem:showTerminalMenuItem atIndex:index];
 	}
 }
 
-- (void)showTerminal:(id)sender
+- (void)toggleTerminal:(id)sender
 {
 	[lastWindowController toggleTerminal];
+}
+
+- (void)toggleTerminalFocus:(id)sender
+{
+	[lastWindowController toggleTerminalFocus];
 }
 
 - (void)uninstallMenuItem

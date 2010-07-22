@@ -15,12 +15,17 @@
 @interface Terminal : NSObject
 {
 	NSMenu* windowMenu;
+	NSMenu* terminalMenu;
+	NSMenuItem* terminalItem;
 	NSMenuItem* showTerminalMenuItem;
+	NSMenuItem* toggleTerminalfocus;
 	NSWindowController* lastWindowController;
+	TerminalWindowController* lastTerminalWindowController;
 	NSMutableDictionary* iVars;
 }
 
 @property(retain) NSWindowController* lastWindowController;
+@property(retain) TerminalWindowController* lastTerminalWindowController;
 
 + (Terminal*)instance;
 - (id)initWithPlugInController:(id <TMPlugInController>)aController;

@@ -22,6 +22,9 @@
 	NSFileHandle *_fileHandleReading;
 	NSFileHandle *_fileHandleWriting;
 	
+	NSString *projectDir;
+	NSString *pathToSbt;
+		
 }
 
 -	(IBAction)enter:(id)sender;
@@ -29,6 +32,8 @@
 -	(IBAction)clearTerminal:(id)sender;
 -	(void)write:(NSString *)string;
 
+@property (retain) NSString *projectDir;
+@property (retain) NSString *pathToSbt;
 @property (assign) IBOutlet NSTextView *output;
 @property (assign) IBOutlet NSTextField *input;
 @property (assign) IBOutlet	NSMenuItem *terminalMenu;

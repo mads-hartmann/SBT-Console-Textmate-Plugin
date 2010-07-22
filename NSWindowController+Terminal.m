@@ -9,6 +9,7 @@
 #import "NSWindowController+Terminal.h"
 #import "TerminalWindowController.h"
 #import "Terminal.h"
+#import "TextMate.h"
 
 // stuff that the textmate-windowcontrollers (OakProjectController, OakDocumentControler) implement
 @interface NSWindowController (TextMate_WindowControllers_Only)
@@ -32,6 +33,22 @@
 	return (NSDrawer*)[ivars objectForKey:@"drawer"];
 }
 
+- (void)toggleTerminalFocus
+{
+	NSMutableDictionary* ivars = [[Terminal instance] getIVarsFor:self];
+	NSDrawer *drawer = [ivars objectForKey:@"drawer"];
+	if ( drawer == nil || [drawer state] == 0) { // closed
+		[self toggleTerminal];
+	}
+	Terminal *instance = [Terminal instance];
+	if ([[[instance lastWindowController] window] firstResponder] == [[instance lastTerminalWindowController] input]){
+		[[[instance lastWindowController] window] makeFirstResponder:[self textView]];
+	} else {
+		[[[instance lastWindowController] window] makeFirstResponder:[[instance lastTerminalWindowController] input]];
+	}
+
+}
+
 - (void)toggleTerminal
 {
 	NSMutableDictionary* ivars = [[Terminal instance] getIVarsFor:self];
@@ -43,13 +60,14 @@
 		NSString* nibPath = [[NSBundle bundleForClass:[[Terminal instance] class]] pathForResource:@"Terminal" ofType:@"nib"];
 		TerminalWindowController* obj = [TerminalWindowController alloc]; 
 		TerminalWindowController* controller = [obj initWithWindowNibPath:nibPath owner:obj];
+		[[Terminal instance] setLastTerminalWindowController:controller];
 		NSView *content = [[controller window] contentView];
 
 		// Create the drawer
-		NSWindow* window=[self window];
+		NSWindow* window = [self window];
 		NSSize contentSize = NSMakeSize([window frame].size.width,100);
-		drawer = [[NSDrawer alloc] initWithContentSize:contentSize
-												   preferredEdge:NSMinYEdge];
+		drawer = [[NSDrawer alloc] initWithContentSize:contentSize 
+										 preferredEdge:NSMinYEdge];
 		[drawer setContentView:content];
 		[drawer setParentWindow:window];
 		[drawer setLeadingOffset:20];
@@ -59,15 +77,28 @@
 	int state = [drawer state];
 	if (state == 2) { // open
 		[drawer close];
+		[[[[Terminal instance] lastWindowController] window] makeFirstResponder:[self textView]];
 	} else if ( state == 0) { // closed
 		[drawer openOnEdge:NSMinYEdge];
+		[[[[Terminal instance] lastWindowController] window] makeFirstResponder:
+		 [[[Terminal instance] lastTerminalWindowController] input]];
 	}
 }
 
 - (void)T_windowDidLoad
 {
 	[self T_windowDidLoad];
-	[[Terminal instance] setLastWindowController:self];
+	if ([self isKindOfClass:OakProjectController]) {
+		NSLog(@"proj");
+		[[[[[NSApp mainMenu] itemWithTitle:@"View"] submenu] itemWithTitle:@"Show/Hide Terminal"] setHidden:NO];
+		[[[[[NSApp mainMenu] itemWithTitle:@"View"] submenu] itemWithTitle:@"Toggle Terminal Foucs"] setHidden:NO];
+		[[Terminal instance] setLastWindowController:self];
+	} else if ([self isKindOfClass:OakDocumentController]){
+		NSLog(@"doc");
+		[[[[[NSApp mainMenu] itemWithTitle:@"View"] submenu] itemWithTitle:@"Show/Hide Terminal"] setHidden:YES];
+		[[[[[NSApp mainMenu] itemWithTitle:@"View"] submenu] itemWithTitle:@"Toggle Terminal Foucs"] setHidden:YES];
+	}
+	
 	
 }
 

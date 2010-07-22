@@ -13,6 +13,7 @@
 
 -	(NSDrawer*)getDrawer;
 -	(void)toggleTerminal;
+-	(void)toggleTerminalFocus;
 -	(void)T_windowDidLoad;
 
 

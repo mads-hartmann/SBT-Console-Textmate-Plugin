@@ -10,7 +10,7 @@
 
 @implementation TerminalWindowController
 
-@synthesize input, output, terminalMenu;
+@synthesize input, output, terminalMenu, projectDir, pathToSbt;
 
 - (id)initWithWindowNibPath:(NSString *)windowNibPath owner:(id)owner
 {	
@@ -66,8 +66,6 @@
 -(void)write:(NSString *)string
 {
 	[string retain];
-	NSLog(@"writing");
-	NSLog(@"%@",string);
 	NSString *outputValue = [NSString stringWithFormat:@"%@%@",[output string], string];
 	[output setString:outputValue];
 	[output scrollToEndOfDocument:self];
@@ -77,7 +75,12 @@
 -(void)runCommand:(NSString *)command
 {
 	[command retain];
-	NSLog(@"running command");
+	if (pathToSbt == nil)
+		[self setPathToSbt:@"/Users/Mads/dev/tools/sbt/sbt_no_colors"];
+	if (projectDir == nil)
+		[self setProjectDir:@"/Users/Mads/dev/projects/lift_processor"];
+	
+	
 	NSPipe *pipe = [NSPipe pipe];
 	NSPipe *pipeInput = [NSPipe pipe];
 	_fileHandleReading = [pipe fileHandleForReading];
@@ -87,9 +90,9 @@
 	[_task setStandardOutput: pipe];
 	[_task setStandardError: pipe];
 	[_task setStandardInput: pipeInput];
-	NSArray *arguments = [NSArray arrayWithObjects: @"/Users/Mads/dev/tools/sbt/sbt_no_colors", command, nil];	
+	NSArray *arguments = [NSArray arrayWithObjects: pathToSbt, command, nil];	
 	[_task setLaunchPath: @"/bin/sh"];
-	[_task setCurrentDirectoryPath:@"/Users/Mads/dev/projects/lift_processor"];
+	[_task setCurrentDirectoryPath:projectDir];
 	[_task setArguments:arguments];
 	[_task launch];
 	
