@@ -89,27 +89,24 @@ static Terminal *sharedInstance = nil;
 		[showTerminalMenuItem setKeyEquivalent:@"$"];
 		[showTerminalMenuItem setKeyEquivalentModifierMask:NSShiftKeyMask|NSCommandKeyMask];
 		[showTerminalMenuItem setTarget:self];
-		[showTerminalMenuItem setHidden:YES];
 		
 		toggleTerminalfocus = [[NSMenuItem alloc] initWithTitle:@"Toggle Terminal Foucs" 
 														 action:@selector(toggleTerminalFocus:) keyEquivalent:@""];
 		[toggleTerminalfocus setKeyEquivalent:@"$"];
 		[toggleTerminalfocus setKeyEquivalentModifierMask:NSCommandKeyMask];
 		[toggleTerminalfocus setTarget:self];
-		[toggleTerminalfocus setHidden:YES];
 		
-		//terminalItem = [[NSMenuItem alloc] initWithTitle:@"Terminal" action:nil keyEquivalent:nil];
+		terminalItem = [[NSMenuItem alloc] initWithTitle:@"Terminal" action:NULL keyEquivalent:@""];
+		[terminalItem setHidden:YES];
 		
 		// creat the menu
-		//terminalMenu = [[NSMenu alloc] initWithTitle:@"Terminal"];
-		//[terminalMenu addItem:showTerminalMenuItem];
-		//[terminalMenu addItem:toggleTerminalfocus];
+		terminalMenu = [[NSMenu alloc] initWithTitle:@"Terminal"];
+		[terminalMenu insertItem:showTerminalMenuItem atIndex:0];
+		[terminalMenu insertItem:toggleTerminalfocus atIndex:0];
 		
 		// add the menu
-		//[windowMenu setSubmenu:terminalMenu forItem:terminalItem];
-		//[windowMenu insertItem:terminalItem atIndex:index];
-		[windowMenu insertItem:toggleTerminalfocus atIndex:index];
-		[windowMenu insertItem:showTerminalMenuItem atIndex:index];
+		[windowMenu insertItem:terminalItem atIndex:index];
+		[windowMenu setSubmenu:terminalMenu forItem:terminalItem];
 	}
 }
 

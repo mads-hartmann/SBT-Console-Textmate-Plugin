@@ -89,15 +89,8 @@
 {
 	[self T_windowDidLoad];
 	if ([self isKindOfClass:OakProjectController]) {
-		NSLog(@"proj");
-		[[[[[NSApp mainMenu] itemWithTitle:@"View"] submenu] itemWithTitle:@"Show/Hide Terminal"] setHidden:NO];
-		[[[[[NSApp mainMenu] itemWithTitle:@"View"] submenu] itemWithTitle:@"Toggle Terminal Foucs"] setHidden:NO];
 		[[Terminal instance] setLastWindowController:self];
-	} else if ([self isKindOfClass:OakDocumentController]){
-		NSLog(@"doc");
-		[[[[[NSApp mainMenu] itemWithTitle:@"View"] submenu] itemWithTitle:@"Show/Hide Terminal"] setHidden:YES];
-		[[[[[NSApp mainMenu] itemWithTitle:@"View"] submenu] itemWithTitle:@"Toggle Terminal Foucs"] setHidden:YES];
-	}
+	} 
 	
 	
 }
