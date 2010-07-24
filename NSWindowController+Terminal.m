@@ -18,6 +18,7 @@
 - (void)goToLineNumber:(id)newLine;
 - (unsigned int)getLineHeight;
 - (NSString*)filename; // that is only implemented by OakProjectController
+- (NSString*)projectDirectory; // that is only implemented by OakProjectController
 
 @end
 
@@ -60,6 +61,9 @@
 		NSString* nibPath = [[NSBundle bundleForClass:[[Terminal instance] class]] pathForResource:@"Terminal" ofType:@"nib"];
 		TerminalWindowController* obj = [TerminalWindowController alloc]; 
 		TerminalWindowController* controller = [obj initWithWindowNibPath:nibPath owner:obj];
+				
+		// setting the project path
+		[controller setProjectDir:[self projectDirectory]];
 		[[Terminal instance] setLastTerminalWindowController:controller];
 		NSView *content = [[controller window] contentView];
 
