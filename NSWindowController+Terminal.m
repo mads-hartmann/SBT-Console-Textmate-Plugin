@@ -11,6 +11,7 @@
 #import "Terminal.h"
 #import "TextMate.h"
 
+
 // stuff that the textmate-windowcontrollers (OakProjectController, OakDocumentControler) implement
 @interface NSWindowController (TextMate_WindowControllers_Only)
 
@@ -19,9 +20,16 @@
 - (unsigned int)getLineHeight;
 - (NSString*)filename; // that is only implemented by OakProjectController
 - (NSString*)projectDirectory; // that is only implemented by OakProjectController
+- (NSDictionary *)environmentVariables;// that is only implemented by OakProjectController
 
 @end
 
+
+@interface NSWindowController (Private) 
+
+- (NSString*)SBTPath;
+
+@end
 
 @implementation NSWindowController (NSWindowControllerTerminal)
 
@@ -64,6 +72,7 @@
 				
 		// setting the project path
 		[controller setProjectDir:[self projectDirectory]];
+		[controller setPathToSbt:[self SBTPath]];
 		[[Terminal instance] setLastTerminalWindowController:controller];
 		NSView *content = [[controller window] contentView];
 
@@ -93,10 +102,24 @@
 {
 	[self T_windowDidLoad];
 	if ([self isKindOfClass:OakProjectController]) {
+		// find the path to SBT in the shell variables		
 		[[Terminal instance] setLastWindowController:self];
 	} 
 	
 	
 }
+
+#pragma mark Private
+
+- (NSString*)SBTPath {
+	NSString *path = "";
+	for (NSDictionary* dic in [[OakPreferencesManager sharedInstance] shellVariables]) {
+		if ([[dic objectForKey:@"variable"] isEqualTo:@"SBT_PATH"]){
+			path = [dic objectForKey:@"value"];
+		}
+	}
+	return path;
+}
+
 
 @end

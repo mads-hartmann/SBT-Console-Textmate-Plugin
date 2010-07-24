@@ -45,7 +45,6 @@
 
 - (IBAction)enter:(id)sender
 {
-	NSLog(@"hitting enter");
 	NSString *outv = [NSString stringWithFormat:@"%@%@\n",[output string],[input stringValue]];
 	[output setString:outv];
 	if( _task && [_task isRunning]) {
@@ -75,12 +74,7 @@
 -(void)runCommand:(NSString *)command
 {
 	[command retain];
-	if (pathToSbt == nil)
-		[self setPathToSbt:@"/Users/Mads/dev/tools/sbt/sbt_no_colors"];
-	if (projectDir == nil)
-		[self setProjectDir:@"/Users/Mads/dev/projects/lift_processor"];
-	
-	
+
 	NSPipe *pipe = [NSPipe pipe];
 	NSPipe *pipeInput = [NSPipe pipe];
 	_fileHandleReading = [pipe fileHandleForReading];

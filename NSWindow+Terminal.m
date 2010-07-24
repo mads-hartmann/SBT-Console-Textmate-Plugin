@@ -32,7 +32,7 @@
 
 - (void)T_setRepresentedFilename:(NSString*)aPath
 {
-	NSLog(@"path: %@",aPath);
+
 }
 
 @end

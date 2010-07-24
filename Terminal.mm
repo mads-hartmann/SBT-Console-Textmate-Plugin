@@ -69,17 +69,14 @@ static Terminal *sharedInstance = nil;
 
 - (void)installMenuItem
 {
-	NSLog(@"istalling");
 	if(windowMenu = [[[[NSApp mainMenu] itemWithTitle:@"View"] submenu] retain])
 	{
 		NSArray* items = [windowMenu itemArray];
-		NSLog(@"test");
 		int index = 0;
 		for (NSMenuItem* item in items)
 		{
 			if ([[item title] isEqualToString:@"Show/Hide Project Drawer"])
 			{
-				NSLog(@"%@",[item title]);
 				index = [items indexOfObject:item]+1;
 			}
 		}
