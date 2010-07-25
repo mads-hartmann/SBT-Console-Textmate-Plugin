@@ -39,8 +39,11 @@
 		[self write:text];
 	
     [text release];
-    if( _task )
+
+    if( _task && [data length] != 0) {
+		// Keep reading if it isn't empty
         [_fileHandleReading readInBackgroundAndNotify];
+	}
 }
 
 - (IBAction)enter:(id)sender
@@ -80,6 +83,14 @@
 	_fileHandleReading = [pipe fileHandleForReading];
 	_fileHandleWriting = [pipeInput fileHandleForWriting];
 	[_fileHandleReading readInBackgroundAndNotify];
+	
+	if (_task != nil){
+		// when we're running a new command, clean up after 
+		//the previous one.
+		[_task release];
+		_task = nil;
+	}
+	
 	_task = [[NSTask alloc] init];
 	[_task setStandardOutput: pipe];
 	[_task setStandardError: pipe];
@@ -96,6 +107,14 @@
 -	(IBAction)clearTerminal:(id)sender
 {
 	[output setString:@""];
+}
+
+-(void)dealloc
+{
+	NSLog(@"Deallocing TerminalWindowController");
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
+	[super dealloc];
 }
 
 @end

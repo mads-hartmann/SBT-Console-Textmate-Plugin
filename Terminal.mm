@@ -64,6 +64,10 @@ static Terminal *sharedInstance = nil;
 - (void)dealloc
 {
 	[self uninstallMenuItem];
+	[lastWindowController release];
+	[iVars release];
+	[sharedInstance release];
+	sharedInstance = nil;
 	[super dealloc];
 }
 
@@ -123,6 +127,10 @@ static Terminal *sharedInstance = nil;
 	[windowMenu removeItem:showTerminalMenuItem];
 	[showTerminalMenuItem release];
 	showTerminalMenuItem = nil;
+	[toggleTerminalfocus release];
+	toggleTerminalfocus = nil;
+	[terminalItem release];
+	terminalItem = nil;
 	[windowMenu release];
 	windowMenu = nil;
 }
