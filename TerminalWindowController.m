@@ -68,8 +68,12 @@
 -(void)write:(NSString *)string
 {
 	[string retain];
-	NSString *outputValue = [NSString stringWithFormat:@"%@%@",[output string], string];
-	[output setString:outputValue];
+
+	
+//	NSDictionary *attrs = [NSDictionary dictionaryWithObject:[NSColor redColor] forKey:NSForegroundColorAttributeName];
+//	NSAttributedString *aString = [[NSAttributedString alloc] initWithString:string attributes:attrs];
+//	[[[output textStorage] mutableString] appendString: aString];
+	[[[output textStorage] mutableString] appendString: string];
 	[output scrollToEndOfDocument:self];
 	[string release];
 }

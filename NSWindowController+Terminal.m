@@ -10,7 +10,7 @@
 #import "TerminalWindowController.h"
 #import "Terminal.h"
 #import "TextMate.h"
-
+#import "KFSplitView.h"
 
 // stuff that the textmate-windowcontrollers (OakProjectController, OakDocumentControler) implement
 @interface NSWindowController (TextMate_WindowControllers_Only)
@@ -33,27 +33,25 @@
 
 @implementation NSWindowController (NSWindowControllerTerminal)
 
-/*
- Get the NSDrawer the Minimap is in. Can return nil if there is no drawer (e.g. if sidepane mode enabled)
- */
-- (NSDrawer*)getDrawer
+- (KFSplitView*)getSplitView
 {
 	NSMutableDictionary* ivars = [[Terminal instance] getIVarsFor:self];
-	return (NSDrawer*)[ivars objectForKey:@"drawer"];
+	return (KFSplitView*)[ivars objectForKey:@"splitView"];
 }
 
 - (void)toggleTerminalFocus
 {
 	NSMutableDictionary* ivars = [[Terminal instance] getIVarsFor:self];
-	NSDrawer *drawer = [ivars objectForKey:@"drawer"];
-	if ( drawer == nil || [drawer state] == 0) { // closed
+	KFSplitView *splitView = [ivars objectForKey:@"splitView"];
+	if ( splitView == nil) { // closed
 		[self toggleTerminal];
 	}
 	Terminal *instance = [Terminal instance];
-	if ([[[instance lastWindowController] window] firstResponder] == [[instance lastTerminalWindowController] input]){
-		[[[instance lastWindowController] window] makeFirstResponder:[self textView]];
-	} else {
+	NSLog(@"%@",[[[instance lastWindowController] window] firstResponder]);
+	if ([[[[instance lastWindowController] window] firstResponder] isKindOfClass:OakTextView]){
 		[[[instance lastWindowController] window] makeFirstResponder:[[instance lastTerminalWindowController] input]];
+	} else {
+		[[[instance lastWindowController] window] makeFirstResponder:[self textView]];
 	}
 
 }
@@ -61,10 +59,10 @@
 - (void)toggleTerminal
 {
 	NSMutableDictionary* ivars = [[Terminal instance] getIVarsFor:self];
-	NSDrawer *drawer = [ivars objectForKey:@"drawer"];
+	KFSplitView *splitView = [ivars objectForKey:@"splitView"];
 	
 	// Creat the drawer if it doesn't exist.
-	if (drawer == nil){
+	if (splitView == nil){
 		// Create the content for the drawer. (hacky, but it needs an owner)
 		NSString* nibPath = [[NSBundle bundleForClass:[[Terminal instance] class]] pathForResource:@"Terminal" ofType:@"nib"];
 		TerminalWindowController* obj = [TerminalWindowController alloc]; 
@@ -74,27 +72,63 @@
 		[controller setProjectDir:[self projectDirectory]];
 		[controller setPathToSbt:[self SBTPath]];
 		[[Terminal instance] setLastTerminalWindowController:controller];
-		NSView *content = [[controller window] contentView];
-
-		// Create the drawer
-		NSWindow* window = [self window];
-		NSSize contentSize = NSMakeSize([window frame].size.width,100);
-		drawer = [[NSDrawer alloc] initWithContentSize:contentSize 
-										 preferredEdge:NSMinYEdge];
-		[drawer setContentView:content];
-		[drawer setParentWindow:window];
-		[drawer setLeadingOffset:20];
-		[drawer setTrailingOffset:20];
-		[ivars setObject:drawer forKey:@"drawer"];
-	}	
-	int state = [drawer state];
-	if (state == 2) { // open
-		[drawer close];
-		[[[[Terminal instance] lastWindowController] window] makeFirstResponder:[self textView]];
-	} else if ( state == 0) { // closed
-		[drawer openOnEdge:NSMinYEdge];
-		[[[[Terminal instance] lastWindowController] window] makeFirstResponder:
-		 [[[Terminal instance] lastTerminalWindowController] input]];
+		NSView *terminalView = [[[controller window] contentView] retain];
+		
+		// check whether projectplus or missingdrawer is present
+		// if so, but our splitview into their splitview, not to confuse their implementation
+		// (which sadly does [window contentView] to find it's own splitView)
+		if (NSClassFromString(@"CWTMSplitView") != nil
+			&& [[NSUserDefaults standardUserDefaults] boolForKey:@"ProjectPlus Sidebar Enabled"]
+			&& [self isKindOfClass:OakProjectController]) {
+			
+			NSView* preExistingSplitView = [[self window] contentView];
+			BOOL ppSidebarIsOnRight = [[NSUserDefaults standardUserDefaults] boolForKey:@"ProjectPlus Sidebar on Right"];
+			
+			NSView* realDocumentView;
+			NSView* originalSidePane;
+			if (ppSidebarIsOnRight) {
+				realDocumentView = [[preExistingSplitView subviews] objectAtIndex:0];
+				originalSidePane = [[preExistingSplitView subviews] objectAtIndex:1];
+			}
+			else {
+				realDocumentView = [[preExistingSplitView subviews] objectAtIndex:1];
+				originalSidePane = [[preExistingSplitView subviews] objectAtIndex:0];
+			}
+			
+			[realDocumentView retain];[realDocumentView removeFromSuperview];
+			splitView = [[KFSplitView alloc] initWithFrame:[realDocumentView frame]];
+			[splitView setVertical:NO];
+			
+			[splitView addSubview:realDocumentView];
+			[splitView addSubview:terminalView];
+			
+			[preExistingSplitView addSubview:splitView];    
+			
+			[realDocumentView release];
+			[originalSidePane release];
+		}
+		// no relevant plugins present, init in contentView of Window
+		else {
+			[[self window] setContentView:nil];
+			NSView* documentView = [[[self window] contentView] retain];
+			splitView = [[KFSplitView alloc] initWithFrame:[documentView frame]];
+			[splitView setVertical:NO];
+			[splitView addSubview:documentView];
+			[splitView addSubview:terminalView];			
+			[[self window] setContentView:splitView];
+		}
+		[terminalView release];
+		[splitView setDividerStyle:NSSplitViewDividerStyleThin];
+		[[[splitView subviews] objectAtIndex:1] setFrameSize:NSMakeSize([[self window] frame].size.width , 200)];
+		[ivars setObject:splitView forKey:@"splitView"];
+	} else {
+		BOOL isCollapsed = [splitView isSubviewCollapsed:[[splitView subviews] objectAtIndex:1]];
+		if (isCollapsed) {
+			[splitView setSubview:[[splitView subviews] objectAtIndex:1] isCollapsed:0];
+		} else {
+			[splitView setSubview:[[splitView subviews] objectAtIndex:1] isCollapsed:1];
+		}
+		[splitView resizeSubviewsWithOldSize:[splitView bounds].size]; // have to do this.
 	}
 }
 
@@ -103,7 +137,7 @@
 	[self T_windowDidLoad];
 	if ([self isKindOfClass:OakProjectController]) {
 		// find the path to SBT in the shell variables		
-		[[Terminal instance] setLastWindowController:self];
+		[[Terminal instance] setLastWindowController:self];		
 	} 
 	
 	
@@ -112,7 +146,7 @@
 #pragma mark Private
 
 - (NSString*)SBTPath {
-	NSString *path = "";
+	NSString *path = @"";
 	for (NSDictionary* dic in [[OakPreferencesManager sharedInstance] shellVariables]) {
 		if ([[dic objectForKey:@"variable"] isEqualTo:@"SBT_PATH"]){
 			path = [dic objectForKey:@"value"];

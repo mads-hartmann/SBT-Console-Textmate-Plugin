@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0926C38511F360ED00448AA8 /* TerminalWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */; };
+		098644B2120366E50052ACBB /* KFSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 098644B1120366E50052ACBB /* KFSplitView.m */; };
 		099D183511F89DFB00DE90DB /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 099D183411F89DFB00DE90DB /* JRSwizzle.m */; };
 		09D2FC6511F8CEE000007A40 /* NSWindowController+Terminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D2FC6411F8CEE000007A40 /* NSWindowController+Terminal.m */; };
 		09D2FC9911F8D68B00007A40 /* NSWindow+Terminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D2FC9811F8D68B00007A40 /* NSWindow+Terminal.m */; };
@@ -24,6 +25,8 @@
 		0926C38311F360ED00448AA8 /* TerminalWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerminalWindowController.h; sourceTree = "<group>"; };
 		0926C38411F360ED00448AA8 /* TerminalWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalWindowController.m; sourceTree = "<group>"; };
 		092CF48411F8957600382E61 /* Clock_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clock_Prefix.pch; sourceTree = "<group>"; };
+		098644B0120366E50052ACBB /* KFSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFSplitView.h; sourceTree = "<group>"; };
+		098644B1120366E50052ACBB /* KFSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFSplitView.m; sourceTree = "<group>"; };
 		099D181111F89A8300DE90DB /* TextMate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextMate.h; sourceTree = "<group>"; };
 		099D183311F89DFB00DE90DB /* JRSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSwizzle.h; sourceTree = "<group>"; };
 		099D183411F89DFB00DE90DB /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSwizzle.m; sourceTree = "<group>"; };
@@ -99,6 +102,8 @@
 		099D181011F89A6D00DE90DB /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				098644B0120366E50052ACBB /* KFSplitView.h */,
+				098644B1120366E50052ACBB /* KFSplitView.m */,
 				099D181111F89A8300DE90DB /* TextMate.h */,
 				099D183311F89DFB00DE90DB /* JRSwizzle.h */,
 				099D183411F89DFB00DE90DB /* JRSwizzle.m */,
@@ -228,6 +233,7 @@
 				099D183511F89DFB00DE90DB /* JRSwizzle.m in Sources */,
 				09D2FC6511F8CEE000007A40 /* NSWindowController+Terminal.m in Sources */,
 				09D2FC9911F8D68B00007A40 /* NSWindow+Terminal.m in Sources */,
+				098644B2120366E50052ACBB /* KFSplitView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

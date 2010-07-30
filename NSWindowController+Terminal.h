@@ -7,11 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+@class KFSplitView;
 
 @interface NSWindowController (NSWindowControllerTerminal) 
 
--	(NSDrawer*)getDrawer;
+- (KFSplitView*)getSplitView;
 -	(void)toggleTerminal;
 -	(void)toggleTerminalFocus;
 -	(void)T_windowDidLoad;
