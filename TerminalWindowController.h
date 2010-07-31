@@ -24,16 +24,22 @@
 	
 	NSString *projectDir;
 	NSString *pathToSbt;
+	
+	NSString *currentLine; 
 		
 }
 
--	(IBAction)enter:(id)sender;
 -	(void)runCommand:(NSString *)command;
--	(IBAction)clearTerminal:(id)sender;
 -	(void)write:(NSString *)string;
+-	(void)writeSingleLine:(NSString *)string;
+-	(NSAttributedString*)colorize:(NSString*)string;
+
+-	(IBAction)clearTerminal:(id)sender;
+-	(IBAction)enter:(id)sender;
 
 @property (retain) NSString *projectDir;
 @property (retain) NSString *pathToSbt;
+@property (retain) NSString *currentLine;
 @property (assign) IBOutlet NSTextView *output;
 @property (assign) IBOutlet NSTextField *input;
 @property (assign) IBOutlet	NSMenuItem *terminalMenu;
