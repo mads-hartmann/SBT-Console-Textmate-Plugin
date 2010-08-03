@@ -19,9 +19,10 @@
 											 selector:@selector( readPipe: )
 												 name:NSFileHandleReadCompletionNotification 
 											   object:nil];
-	currentLine = [[NSString alloc] initWithString:@""];
+	[self setCurrentLine:[NSMutableString stringWithCapacity:256]];
 	return self;
 }
+
 
 -(void)readPipe: (NSNotification *)notification
 {
@@ -60,8 +61,8 @@
 			[self runCommand:command];
 	}
 	[input setStringValue:@""];
+	[[self window] makeFirstResponder:input];
 }
-
 
 /*	
  *	Writes a message to the TextView. It will only print the message if it contains a newline char (\n).
@@ -73,26 +74,52 @@
 	[string retain];
 	
 	if([string rangeOfString:@"\n"].location == NSNotFound){
-		currentLine = [currentLine stringByAppendingString:string];
+		[currentLine appendString:string];
 	} else { // there are newlines!
 		
-		NSArray *lines = [string componentsSeparatedByString: @"\n"];
+		NSArray *splittet = [[string componentsSeparatedByString: @"\n"] retain];
+		NSMutableArray *lines = [[NSMutableArray alloc] init];
 		
-		// first finish the current line
-		currentLine = [currentLine stringByAppendingString:[lines objectAtIndex:0]];
-		[self writeSingleLine:currentLine];
-		
-		// Now add each of the rest of the lines. 
-		id *objects;
-		NSRange range = NSMakeRange(1, [lines count]-1);
-		objects = malloc(sizeof(id) * range.length);
-		[lines getObjects:objects range:range];
-		
-		int i;
-		for (i = 0; i < range.length; i++) {
-			[self writeSingleLine:(NSString*)objects[i]];
+		// filter all the empty lines.
+		for (NSString *str in splittet) {
+			if(![str isEqualToString:@""]) 
+				[lines addObject:str];
 		}
-		free(objects);
+		if ([lines count] > 2) {
+			// first finish the current line
+			NSLog(@"count > 2");
+			NSLog(@"%@",lines);
+			[currentLine appendString:[lines objectAtIndex:0]];
+			[self writeSingleLine:currentLine];
+			
+			// Now add each of the strings upto the last one
+			id *objects;
+			NSRange range = NSMakeRange(1, [lines count]-2);
+			objects = malloc(sizeof(id) * range.length);
+			[lines getObjects:objects range:range];
+			
+			int i;
+			for (i = 0; i < range.length; i++) {
+				[self writeSingleLine:(NSString*)objects[i]];
+			}
+			// now add the last one as the current line
+			[currentLine setString:[lines objectAtIndex:[lines count]-1]];
+			free(objects);
+		} else if ([lines count] == 2) {
+			NSLog(@"count == 2");
+			NSLog(@"%@",lines);
+			[currentLine appendString:[lines objectAtIndex:0]];
+			[self writeSingleLine:currentLine];
+			[currentLine appendString:[lines objectAtIndex:1]];
+		} else if ([lines count] == 1) {
+			NSLog(@"count == 1 or is it? %i",[lines count]);
+			[currentLine appendString:[lines objectAtIndex:0]];
+			[self writeSingleLine:currentLine];
+			[currentLine setString:@""];
+		}
+
+		[splittet release];
+		[lines release];
 	}
 	[string release];
 }
@@ -102,13 +129,17 @@
  */
 -(void)writeSingleLine:(NSString *)string {
 
+	[string retain];
 	if (![string isEqualToString:@""]){
-		NSAttributedString *aString = [self colorize:[string stringByAppendingString:[[NSString alloc] initWithString:@"\n"]]];
+		NSAttributedString *aString = [self colorize:[string stringByAppendingString:@"\n"]];
+		[aString retain];
 		[[output textStorage] appendAttributedString:aString];
 		[output scrollToEndOfDocument:self];
-		currentLine = [[NSString alloc] initWithString:@""];
+		[currentLine setString:@""];
 		[aString release];
 	}
+	[string release];
+
 }
 
 /*
@@ -118,22 +149,25 @@
 -(NSAttributedString*)colorize:(NSString*)string {
 	NSDictionary *attrs;
 	if ([string rangeOfString:@"[error]"].location != NSNotFound) {
-		attrs = [NSDictionary dictionaryWithObject:[NSColor redColor] forKey:NSForegroundColorAttributeName];
+		attrs = [NSDictionary dictionaryWithObject:[NSColor colorWithCalibratedRed:0.761 green:0.212 blue:0.106 alpha:1] forKey:NSForegroundColorAttributeName];
 	}
 	else if([string rangeOfString:@"[success]"].location != NSNotFound) {
-		attrs = [NSDictionary dictionaryWithObject:[NSColor greenColor] forKey:NSForegroundColorAttributeName];
+		attrs = [NSDictionary dictionaryWithObject:[NSColor colorWithCalibratedRed:0.125 green:0.729 blue:0.149 alpha:1] forKey:NSForegroundColorAttributeName];
 	}
 	else if([string rangeOfString:@"[warn]"].location != NSNotFound) {
-		attrs = [NSDictionary dictionaryWithObject:[NSColor yellowColor] forKey:NSForegroundColorAttributeName];
+		attrs = [NSDictionary dictionaryWithObject:[NSColor colorWithCalibratedRed:0.682 green:0.647 blue:0.165 alpha:1] forKey:NSForegroundColorAttributeName];
 	}
 	else if([string rangeOfString:@"[info] =="].location != NSNotFound) {
-		attrs = [NSDictionary dictionaryWithObject:[NSColor blueColor] forKey:NSForegroundColorAttributeName];
+		attrs = [NSDictionary dictionaryWithObject:[NSColor colorWithCalibratedRed:0.278 green:0.180 blue:0.882 alpha:1] forKey:NSForegroundColorAttributeName];
 	}
 	else {
 		attrs = [NSDictionary dictionaryWithObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
 	}
-	return [[NSAttributedString alloc] initWithString:string attributes:attrs];
+	return [[[NSAttributedString alloc] initWithString:string attributes:attrs] autorelease];
 }
+
+// 73 46 225
+// 183 163 39
 
 -(void)runCommand:(NSString *)command
 {
@@ -171,6 +205,9 @@
 
 -(void)dealloc
 {
+	NSLog(@"deallocing TerminalWindowController");
+	[currentLine release];
+	currentLine = nil;
 	[[NSNotificationCenter defaultCenter] removeObserver:self];	
 	[super dealloc];
 }

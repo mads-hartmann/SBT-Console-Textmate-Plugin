@@ -25,7 +25,7 @@
 	NSString *projectDir;
 	NSString *pathToSbt;
 	
-	NSString *currentLine; 
+	NSMutableString *currentLine; 
 		
 }
 
@@ -39,7 +39,7 @@
 
 @property (retain) NSString *projectDir;
 @property (retain) NSString *pathToSbt;
-@property (retain) NSString *currentLine;
+@property (retain) NSMutableString *currentLine;
 @property (assign) IBOutlet NSTextView *output;
 @property (assign) IBOutlet NSTextField *input;
 @property (assign) IBOutlet	NSMenuItem *terminalMenu;

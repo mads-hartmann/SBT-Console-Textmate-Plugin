@@ -67,12 +67,13 @@
 		NSString* nibPath = [[NSBundle bundleForClass:[[Terminal instance] class]] pathForResource:@"Terminal" ofType:@"nib"];
 		TerminalWindowController* obj = [TerminalWindowController alloc]; 
 		TerminalWindowController* controller = [obj initWithWindowNibPath:nibPath owner:obj];
-				
+		
 		// setting the project path
 		[controller setProjectDir:[self projectDirectory]];
 		[controller setPathToSbt:[self SBTPath]];
 		[[Terminal instance] setLastTerminalWindowController:controller];
-		NSView *terminalView = [[[controller window] contentView] retain];
+		NSView *terminalView = [[controller window] contentView];
+		[terminalView retain];
 		
 		// check whether projectplus or missingdrawer is present
 		// if so, but our splitview into their splitview, not to confuse their implementation
@@ -95,7 +96,9 @@
 				originalSidePane = [[preExistingSplitView subviews] objectAtIndex:0];
 			}
 			
-			[realDocumentView retain];[realDocumentView removeFromSuperview];
+			[originalSidePane retain];
+			[realDocumentView retain];
+			[realDocumentView removeFromSuperview];
 			splitView = [[KFSplitView alloc] initWithFrame:[realDocumentView frame]];
 			[splitView setVertical:NO];
 			
@@ -116,11 +119,13 @@
 			[splitView addSubview:documentView];
 			[splitView addSubview:terminalView];			
 			[[self window] setContentView:splitView];
+			[documentView release];
 		}
 		[terminalView release];
 		[splitView setDividerStyle:NSSplitViewDividerStyleThin];
 		[[[splitView subviews] objectAtIndex:1] setFrameSize:NSMakeSize([[self window] frame].size.width , 200)];
 		[ivars setObject:splitView forKey:@"splitView"];
+		[splitView release];
 	} else {
 		BOOL isCollapsed = [splitView isSubviewCollapsed:[[splitView subviews] objectAtIndex:1]];
 		if (isCollapsed) {
