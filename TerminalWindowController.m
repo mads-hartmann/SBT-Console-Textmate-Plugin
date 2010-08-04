@@ -45,6 +45,8 @@
     if( _task && [data length] != 0) {
 		// Keep reading if it isn't empty
         [_fileHandleReading readInBackgroundAndNotify];
+	} else {
+		[self writeSingleLine:currentLine];
 	}
 }
 
@@ -72,53 +74,30 @@
 -(void)write:(NSString *)string
 {
 	[string retain];
-	
-	if([string rangeOfString:@"\n"].location == NSNotFound){
-		[currentLine appendString:string];
-	} else { // there are newlines!
-		
-		NSArray *splittet = [[string componentsSeparatedByString: @"\n"] retain];
-		NSMutableArray *lines = [[NSMutableArray alloc] init];
-		
-		// filter all the empty lines.
-		for (NSString *str in splittet) {
-			if(![str isEqualToString:@""]) 
-				[lines addObject:str];
-		}
-		if ([lines count] > 2) {
-			// first finish the current line
-			NSLog(@"count > 2");
-			NSLog(@"%@",lines);
-			[currentLine appendString:[lines objectAtIndex:0]];
-			[self writeSingleLine:currentLine];
-			
-			// Now add each of the strings upto the last one
-			id *objects;
-			NSRange range = NSMakeRange(1, [lines count]-2);
-			objects = malloc(sizeof(id) * range.length);
-			[lines getObjects:objects range:range];
-			
-			int i;
-			for (i = 0; i < range.length; i++) {
-				[self writeSingleLine:(NSString*)objects[i]];
-			}
-			// now add the last one as the current line
-			[currentLine setString:[lines objectAtIndex:[lines count]-1]];
-			free(objects);
-		} else if ([lines count] == 2) {
-			NSLog(@"count == 2");
-			NSLog(@"%@",lines);
-			[currentLine appendString:[lines objectAtIndex:0]];
-			[self writeSingleLine:currentLine];
-			[currentLine appendString:[lines objectAtIndex:1]];
-		} else if ([lines count] == 1) {
-			NSLog(@"count == 1 or is it? %i",[lines count]);
-			[currentLine appendString:[lines objectAtIndex:0]];
-			[self writeSingleLine:currentLine];
-			[currentLine setString:@""];
-		}
 
-		[splittet release];
+	if([string rangeOfString:@"\n"].location == NSNotFound){
+		// there a no newlines. This most be a continuation of some earlier ouput
+		if ([string length] > 0 && [[string substringToIndex:1] isEqualToString:@"["]) {
+			[self writeSingleLine:currentLine];
+			[currentLine setString:string];	
+		} else {
+			[currentLine appendString:string];
+		}
+	} else {
+		// there are many newlines. 
+		NSArray *lines = [string componentsSeparatedByString: @"\n"];
+		[lines retain];
+		for(NSString *line in lines) {
+			if ( [line length] == 0 ||
+				([line length] > 0 && 
+				 [[line substringToIndex:1] isEqualToString:@"["])) 
+			{
+				[self writeSingleLine:currentLine];
+				[currentLine setString:line];
+			} else {
+				[currentLine appendString:line];
+			}
+		}
 		[lines release];
 	}
 	[string release];
@@ -165,9 +144,6 @@
 	}
 	return [[[NSAttributedString alloc] initWithString:string attributes:attrs] autorelease];
 }
-
-// 73 46 225
-// 183 163 39
 
 -(void)runCommand:(NSString *)command
 {
