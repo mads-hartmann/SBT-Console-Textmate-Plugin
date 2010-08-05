@@ -1,3 +1,17 @@
+Usage
+=====
+
+Simply open a Textmate proejct and press cmd+shift+$ and it will toggle the terminal. Now you can type in any SBT command and see the input in the console-view. 
+
+cmd+$ will toggle focus between the document and the console.
+
+Todo
+====
+
+- Convert errors to links so you can jump to errors by clicking on the error lines.
+- Make short-keys for next error / previous error 
+- Implement "history" so you can pre key-up/key-down to cycle through previous commands
+
 Installation
 ============
 
