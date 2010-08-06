@@ -74,15 +74,16 @@
 		[[Terminal instance] setLastTerminalWindowController:controller];
 		NSView *terminalView = [[controller window] contentView];
 		[terminalView retain];
+		NSView* documentView = [[[self window] contentView] retain];
 		
 		// check whether projectplus or missingdrawer is present
-		// if so, but our splitview into their splitview, not to confuse their implementation
+		// if so, put our splitview into their splitview, not to confuse their implementation
 		// (which sadly does [window contentView] to find it's own splitView)
 		if (NSClassFromString(@"CWTMSplitView") != nil
 			&& [[NSUserDefaults standardUserDefaults] boolForKey:@"ProjectPlus Sidebar Enabled"]
 			&& [self isKindOfClass:OakProjectController]) {
 			
-			NSView* preExistingSplitView = [[self window] contentView];
+			NSView* preExistingSplitView = documentView;
 			BOOL ppSidebarIsOnRight = [[NSUserDefaults standardUserDefaults] boolForKey:@"ProjectPlus Sidebar on Right"];
 			
 			NSView* realDocumentView;
@@ -109,23 +110,20 @@
 			
 			[realDocumentView release];
 			[originalSidePane release];
-		}
-		// no relevant plugins present, init in contentView of Window
-		else {
+		} else { // no relevant plugins present, init in contentView of Window
 			[[self window] setContentView:nil];
-			NSView* documentView = [[[self window] contentView] retain];
 			splitView = [[KFSplitView alloc] initWithFrame:[documentView frame]];
 			[splitView setVertical:NO];
 			[splitView addSubview:documentView];
 			[splitView addSubview:terminalView];			
 			[[self window] setContentView:splitView];
-			[documentView release];
 		}
 		[terminalView release];
 		[splitView setDividerStyle:NSSplitViewDividerStyleThin];
 		[[[splitView subviews] objectAtIndex:1] setFrameSize:NSMakeSize([[self window] frame].size.width , 200)];
 		[ivars setObject:splitView forKey:@"splitView"];
 		[splitView release];
+		[documentView release];
 	} else {
 		BOOL isCollapsed = [splitView isSubviewCollapsed:[[splitView subviews] objectAtIndex:1]];
 		if (isCollapsed) {
