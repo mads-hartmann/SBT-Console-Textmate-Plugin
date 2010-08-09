@@ -124,25 +124,8 @@
 }
 
 -(NSAttributedString*)createAttributedString:(NSString*)string {
+	NSMutableAttributedString *aString = [[NSMutableAttributedString alloc] initWithString:string];
 	
-	NSMutableDictionary *attrs = [[NSMutableDictionary alloc] initWithCapacity:2];
-	
-	// adding the color attribute
-	if ([string rangeOfString:@"[error]"].location != NSNotFound) {
-		[attrs setValue:[NSColor colorWithCalibratedRed:0.761 green:0.212 blue:0.106 alpha:1] forKey:NSForegroundColorAttributeName];
-	}
-	else if([string rangeOfString:@"[success]"].location != NSNotFound) {
-		[attrs setValue:[NSColor colorWithCalibratedRed:0.125 green:0.729 blue:0.149 alpha:1] forKey:NSForegroundColorAttributeName];
-	}
-	else if([string rangeOfString:@"[warn]"].location != NSNotFound) {
-		[attrs setValue:[NSColor colorWithCalibratedRed:0.682 green:0.647 blue:0.165 alpha:1] forKey:NSForegroundColorAttributeName];
-	}
-	else if([string rangeOfString:@"[info] =="].location != NSNotFound) {
-		[attrs setValue:[NSColor colorWithCalibratedRed:0.278 green:0.180 blue:0.882 alpha:1] forKey:NSForegroundColorAttributeName];
-	}
-	else {
-		[attrs setValue:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
-	}
 	// adding the link attribute if it is applicable
 	if ([string rangeOfString:[NSString stringWithFormat:@"[error] %@",projectDir]].location != NSNotFound){
 		NSMutableString *path = [[NSMutableString alloc] initWithString:string];
@@ -151,23 +134,51 @@
 		NSArray *chunks = [path componentsSeparatedByString:@":"];
 		[chunks retain];
 		
-		NSString *link = [NSString stringWithFormat:@"txmt://open/?url=file://%@&line%@",
+		// get the range of the link
+		NSString *linkString = [NSString stringWithFormat:@"%@:%@", [chunks objectAtIndex:0],[chunks objectAtIndex:1]];
+		NSRange range = [string rangeOfString:linkString];
+		
+		// create the Textmate url Scheme link.
+		NSString *link = [NSString stringWithFormat:@"txmt://open/?url=file://%@&line=%@&column=0",
 						  [chunks objectAtIndex:0],
 						  [chunks objectAtIndex:1]];
 		[link retain];
 		
-		NSURL* fileURL = [NSURL fileURLWithPath:link];
-		[fileURL retain];
+		// add the link to the appropriate range.
+		[aString addAttribute:NSLinkAttributeName value:link range:NSMakeRange(range.location, range.length)];
 		
-		// Adding the url
-		[attrs setValue:link forKey:NSLinkAttributeName];
-		
-		[fileURL release];
 		[link release];
 		[chunks release];
 		[path release];
 	}
-	return [[[NSAttributedString alloc] initWithString:string attributes:attrs] autorelease];
+	
+	// adding the color attribute
+	if ([string rangeOfString:@"[error]"].location != NSNotFound) {
+		[aString addAttribute:NSForegroundColorAttributeName 
+						value:[NSColor colorWithCalibratedRed:0.761 green:0.212 blue:0.106 alpha:1] 
+						range:NSMakeRange(0, [aString length]-1)];
+	}
+	else if([string rangeOfString:@"[success]"].location != NSNotFound) {
+		[aString addAttribute:NSForegroundColorAttributeName 
+						value:[NSColor colorWithCalibratedRed:0.125 green:0.729 blue:0.149 alpha:1]
+						range:NSMakeRange(0, [aString length]-1)];
+	}
+	else if([string rangeOfString:@"[warn]"].location != NSNotFound) {
+		[aString addAttribute:NSForegroundColorAttributeName 
+						value:[NSColor colorWithCalibratedRed:0.682 green:0.647 blue:0.165 alpha:1]
+						range:NSMakeRange(0, [aString length]-1)];
+	}
+	else if([string rangeOfString:@"[info] =="].location != NSNotFound) {
+		[aString addAttribute:NSForegroundColorAttributeName 
+						value:[NSColor colorWithCalibratedRed:0.278 green:0.180 blue:0.882 alpha:1]
+						range:NSMakeRange(0, [aString length]-1)];
+	}
+	else {
+		[aString addAttribute:NSForegroundColorAttributeName 
+						value:[NSColor blackColor]
+						range:NSMakeRange(0, [aString length]-1)];
+	}
+	return [aString autorelease];
 }
 
 
