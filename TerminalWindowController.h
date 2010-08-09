@@ -32,7 +32,7 @@
 -	(void)runCommand:(NSString *)command;
 -	(void)write:(NSString *)string;
 -	(void)writeSingleLine:(NSString *)string;
--	(NSAttributedString*)colorize:(NSString*)string;
+-	(NSAttributedString*)createAttributedString:(NSString*)string;
 
 -	(IBAction)clearTerminal:(id)sender;
 -	(IBAction)enter:(id)sender;

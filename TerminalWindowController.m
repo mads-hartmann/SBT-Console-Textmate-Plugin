@@ -110,7 +110,9 @@
 
 	[string retain];
 	if (![string isEqualToString:@""]){
-		NSAttributedString *aString = [self colorize:[string stringByAppendingString:@"\n"]];
+		
+		
+		NSAttributedString *aString = [self createAttributedString:[string stringByAppendingString:@"\n"]];
 		[aString retain];
 		[[output textStorage] appendAttributedString:aString];
 		[output scrollToEndOfDocument:self];
@@ -121,29 +123,53 @@
 
 }
 
-/*
- *	Takes a String and adds the color to it. If it contains the word error it will 
- *	return an NSAttributedString with NSForegroundColorAttributeName set to colorRed etc.
- */
--(NSAttributedString*)colorize:(NSString*)string {
-	NSDictionary *attrs;
+-(NSAttributedString*)createAttributedString:(NSString*)string {
+	
+	NSMutableDictionary *attrs = [[NSMutableDictionary alloc] initWithCapacity:2];
+	
+	// adding the color attribute
 	if ([string rangeOfString:@"[error]"].location != NSNotFound) {
-		attrs = [NSDictionary dictionaryWithObject:[NSColor colorWithCalibratedRed:0.761 green:0.212 blue:0.106 alpha:1] forKey:NSForegroundColorAttributeName];
+		[attrs setValue:[NSColor colorWithCalibratedRed:0.761 green:0.212 blue:0.106 alpha:1] forKey:NSForegroundColorAttributeName];
 	}
 	else if([string rangeOfString:@"[success]"].location != NSNotFound) {
-		attrs = [NSDictionary dictionaryWithObject:[NSColor colorWithCalibratedRed:0.125 green:0.729 blue:0.149 alpha:1] forKey:NSForegroundColorAttributeName];
+		[attrs setValue:[NSColor colorWithCalibratedRed:0.125 green:0.729 blue:0.149 alpha:1] forKey:NSForegroundColorAttributeName];
 	}
 	else if([string rangeOfString:@"[warn]"].location != NSNotFound) {
-		attrs = [NSDictionary dictionaryWithObject:[NSColor colorWithCalibratedRed:0.682 green:0.647 blue:0.165 alpha:1] forKey:NSForegroundColorAttributeName];
+		[attrs setValue:[NSColor colorWithCalibratedRed:0.682 green:0.647 blue:0.165 alpha:1] forKey:NSForegroundColorAttributeName];
 	}
 	else if([string rangeOfString:@"[info] =="].location != NSNotFound) {
-		attrs = [NSDictionary dictionaryWithObject:[NSColor colorWithCalibratedRed:0.278 green:0.180 blue:0.882 alpha:1] forKey:NSForegroundColorAttributeName];
+		[attrs setValue:[NSColor colorWithCalibratedRed:0.278 green:0.180 blue:0.882 alpha:1] forKey:NSForegroundColorAttributeName];
 	}
 	else {
-		attrs = [NSDictionary dictionaryWithObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
+		[attrs setValue:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
+	}
+	// adding the link attribute if it is applicable
+	if ([string rangeOfString:[NSString stringWithFormat:@"[error] %@",projectDir]].location != NSNotFound){
+		NSMutableString *path = [[NSMutableString alloc] initWithString:string];
+		[path deleteCharactersInRange:NSMakeRange(0, 8)]; // remove [error]\s
+		
+		NSArray *chunks = [path componentsSeparatedByString:@":"];
+		[chunks retain];
+		
+		NSString *link = [NSString stringWithFormat:@"txmt://open/?url=file://%@&line%@",
+						  [chunks objectAtIndex:0],
+						  [chunks objectAtIndex:1]];
+		[link retain];
+		
+		NSURL* fileURL = [NSURL fileURLWithPath:link];
+		[fileURL retain];
+		
+		// Adding the url
+		[attrs setValue:link forKey:NSLinkAttributeName];
+		
+		[fileURL release];
+		[link release];
+		[chunks release];
+		[path release];
 	}
 	return [[[NSAttributedString alloc] initWithString:string attributes:attrs] autorelease];
 }
+
 
 -(void)runCommand:(NSString *)command
 {
