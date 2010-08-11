@@ -33,6 +33,7 @@
 -	(void)write:(NSString *)string;
 -	(void)writeSomeText:(NSString *)string;
 -	(void)writeSingleLine:(NSString *)string;
+-	(void)focusInputField;
 -	(NSAttributedString*)createAttributedString:(NSString*)string;
 
 -	(IBAction)clearTerminal:(id)sender;

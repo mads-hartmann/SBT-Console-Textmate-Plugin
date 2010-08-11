@@ -55,9 +55,14 @@
 		[self writeSomeText:@"> "];
 		// uhm, make the input the first responder no matter what. 
 		[input setEnabled:true];
-		[[[[Terminal instance] lastWindowController] window] makeFirstResponder:input];
-		[[[[Terminal instance] lastTerminalWindowController] window] makeFirstResponder:input];
+		[self focusInputField];
 	}
+}
+
+- (void)focusInputField 
+{
+	[[[[Terminal instance] lastWindowController] window] makeFirstResponder:input];
+	[[[[Terminal instance] lastTerminalWindowController] window] makeFirstResponder:input];
 }
 
 - (IBAction)enter:(id)sender

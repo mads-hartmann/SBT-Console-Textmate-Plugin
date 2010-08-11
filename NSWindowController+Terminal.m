@@ -124,16 +124,21 @@
 		[ivars setObject:splitView forKey:@"splitView"];
 		[splitView release];
 		[documentView release];
+		[[[Terminal instance] lastTerminalWindowController] focusInputField];
 	} else {
 		BOOL isCollapsed = [splitView isSubviewCollapsed:[[splitView subviews] objectAtIndex:1]];
 		if (isCollapsed) {
 			[splitView setSubview:[[splitView subviews] objectAtIndex:1] isCollapsed:0];
+			[[[Terminal instance] lastTerminalWindowController] focusInputField];
 		} else {
 			[splitView setSubview:[[splitView subviews] objectAtIndex:1] isCollapsed:1];
+			[[[[Terminal instance] lastWindowController] window] makeFirstResponder:[self textView]];
 		}
 		[splitView resizeSubviewsWithOldSize:[splitView bounds].size]; // have to do this.
 	}
 }
+
+
 
 - (void)T_windowDidLoad
 {

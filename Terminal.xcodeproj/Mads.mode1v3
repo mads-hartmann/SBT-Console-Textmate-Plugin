@@ -276,7 +276,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>16</integer>
+									<integer>10</integer>
+									<integer>8</integer>
 									<integer>7</integer>
 									<integer>0</integer>
 								</array>
@@ -319,7 +320,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>TerminalWindowController.m</string>
+								<string>NSWindowController+Terminal.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -327,11 +328,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>TerminalWindowController.m</string>
+										<string>NSWindowController+Terminal.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>09176ECB12133729006CDED3</string>
+										<string>09176EFF12133BFB006CDED3</string>
 										<key>history</key>
 										<array>
 											<string>099D18DD11F8B11700DE90DB</string>
@@ -341,12 +342,12 @@
 											<string>096F24351208839D009BA39F</string>
 											<string>096F24361208839D009BA39F</string>
 											<string>096F243A1208872E009BA39F</string>
-											<string>09176E8D12132DFA006CDED3</string>
-											<string>09176EB0121332DE006CDED3</string>
 											<string>09176EB1121332DE006CDED3</string>
-											<string>09176EB2121332DE006CDED3</string>
 											<string>09176EB3121332DE006CDED3</string>
-											<string>09176EB4121332DE006CDED3</string>
+											<string>09176EE812133B06006CDED3</string>
+											<string>09176EF912133BEE006CDED3</string>
+											<string>09176EFA12133BEE006CDED3</string>
+											<string>09176EFB12133BEE006CDED3</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>

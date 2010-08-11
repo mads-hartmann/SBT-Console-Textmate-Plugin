@@ -88,14 +88,14 @@ static Terminal *sharedInstance = nil;
 		// create the items
 		showTerminalMenuItem = [[NSMenuItem alloc] initWithTitle:@"Show/Hide Terminal" 
 														  action:@selector(toggleTerminal:) keyEquivalent:@""];
-		[showTerminalMenuItem setKeyEquivalent:@"$"];
-		[showTerminalMenuItem setKeyEquivalentModifierMask:NSShiftKeyMask|NSCommandKeyMask];
+		[showTerminalMenuItem setKeyEquivalent:@"1"];
+		[showTerminalMenuItem setKeyEquivalentModifierMask:NSShiftKeyMask|NSControlKeyMask];
 		[showTerminalMenuItem setTarget:self];
 		
 		toggleTerminalfocus = [[NSMenuItem alloc] initWithTitle:@"Toggle Terminal Foucs" 
 														 action:@selector(toggleTerminalFocus:) keyEquivalent:@""];
-		[toggleTerminalfocus setKeyEquivalent:@"$"];
-		[toggleTerminalfocus setKeyEquivalentModifierMask:NSCommandKeyMask];
+		[toggleTerminalfocus setKeyEquivalent:@"1"];
+		[toggleTerminalfocus setKeyEquivalentModifierMask:NSShiftKeyMask|NSCommandKeyMask];
 		[toggleTerminalfocus setTarget:self];
 		
 		terminalItem = [[NSMenuItem alloc] initWithTitle:@"Terminal" action:NULL keyEquivalent:@""];
