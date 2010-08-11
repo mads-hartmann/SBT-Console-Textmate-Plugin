@@ -31,6 +31,7 @@
 
 -	(void)runCommand:(NSString *)command;
 -	(void)write:(NSString *)string;
+-	(void)writeSomeText:(NSString *)string;
 -	(void)writeSingleLine:(NSString *)string;
 -	(NSAttributedString*)createAttributedString:(NSString*)string;
 

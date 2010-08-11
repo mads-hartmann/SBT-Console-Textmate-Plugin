@@ -23,6 +23,10 @@
 	return self;
 }
 
+- (void)windowDidLoad
+{
+	[output setString:@"> "];
+}
 
 -(void)readPipe: (NSNotification *)notification
 {
@@ -47,12 +51,14 @@
         [_fileHandleReading readInBackgroundAndNotify];
 	} else {
 		[self writeSingleLine:currentLine];
+		[self writeSomeText:@"> "];
 	}
 }
 
 - (IBAction)enter:(id)sender
 {
-	[self writeSingleLine:[input stringValue]];
+	NSString *str = [NSString stringWithFormat:@"%@%@", [input stringValue], @"\n"];
+	[self writeSomeText:str];
 	if( _task && [_task isRunning]) {
 		NSString *stop = @"\n";
 		[_fileHandleWriting writeData:[stop dataUsingEncoding:NSUTF8StringEncoding]];
@@ -103,6 +109,14 @@
 	[string release];
 }
 
+-(void)writeSomeText:(NSString *)string {
+	NSAttributedString *aString = [self createAttributedString:string];
+	[aString retain];
+	[[output textStorage] appendAttributedString:aString];
+	[output scrollToEndOfDocument:self];
+	[aString release];
+}
+
 /* 
  *	Adds colors to the string using colorize and adds the string to output
  */
@@ -110,8 +124,6 @@
 
 	[string retain];
 	if (![string isEqualToString:@""]){
-		
-		
 		NSAttributedString *aString = [self createAttributedString:[string stringByAppendingString:@"\n"]];
 		[aString retain];
 		[[output textStorage] appendAttributedString:aString];
