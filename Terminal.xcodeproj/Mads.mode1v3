@@ -332,22 +332,22 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>09176EFF12133BFB006CDED3</string>
+										<string>09176F76121343A9006CDED3</string>
 										<key>history</key>
 										<array>
 											<string>099D18DD11F8B11700DE90DB</string>
 											<string>091B12E711FB899B00B28678</string>
-											<string>098644EC12036DBC0052ACBB</string>
-											<string>098644ED12036DBC0052ACBB</string>
 											<string>096F24351208839D009BA39F</string>
 											<string>096F24361208839D009BA39F</string>
 											<string>096F243A1208872E009BA39F</string>
-											<string>09176EB1121332DE006CDED3</string>
-											<string>09176EB3121332DE006CDED3</string>
-											<string>09176EE812133B06006CDED3</string>
 											<string>09176EF912133BEE006CDED3</string>
-											<string>09176EFA12133BEE006CDED3</string>
-											<string>09176EFB12133BEE006CDED3</string>
+											<string>09176F5412134239006CDED3</string>
+											<string>09176F5612134239006CDED3</string>
+											<string>09176F5D121342BE006CDED3</string>
+											<string>09176F6212134333006CDED3</string>
+											<string>09176F6412134333006CDED3</string>
+											<string>09176F74121343A9006CDED3</string>
+											<string>09176F75121343A9006CDED3</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -545,6 +545,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>0998EAF811C1237100D5D4EF</string>
 		<string>/Users/Mads/dev/projects/textmate_console_plugin/Terminal.xcodeproj</string>
 	</array>
@@ -570,7 +571,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string></string>
+								<string>NSWindowController+Terminal.h</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -587,6 +588,8 @@
 							<string>455pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -786,7 +789,7 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CDD528C0622207200134675</string>
 										<key>PBXProjectModuleLabel</key>
-										<string></string>
+										<string>NSWindowController+Terminal.m</string>
 										<key>StatusBarVisibility</key>
 										<true/>
 									</dict>
@@ -795,7 +798,7 @@
 										<key>Frame</key>
 										<string>{{0, 0}, {781, 212}}</string>
 										<key>RubberWindowFrame</key>
-										<string>398 134 781 470 0 0 1440 878 </string>
+										<string>604 249 781 470 0 0 1440 878 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXNavigatorGroup</string>
@@ -821,7 +824,7 @@
 								<key>Frame</key>
 								<string>{{0, 217}, {781, 212}}</string>
 								<key>RubberWindowFrame</key>
-								<string>398 134 781 470 0 0 1440 878 </string>
+								<string>604 249 781 470 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXProjectFindModule</string>
@@ -844,13 +847,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C530D57069F1CE1000CFCEE</string>
-				<string>090165441209CD040088A147</string>
-				<string>090165451209CD040088A147</string>
+				<string>09176F2112134052006CDED3</string>
+				<string>09176F2212134052006CDED3</string>
 				<string>1CDD528C0622207200134675</string>
 				<string>1CD0528E0623707200166675</string>
 			</array>
 			<key>WindowString</key>
-			<string>398 134 781 470 0 0 1440 878 </string>
+			<string>604 249 781 470 0 0 1440 878 </string>
 			<key>WindowToolGUID</key>
 			<string>1C530D57069F1CE1000CFCEE</string>
 			<key>WindowToolIsVisible</key>

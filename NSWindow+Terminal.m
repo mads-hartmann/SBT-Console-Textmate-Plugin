@@ -25,6 +25,7 @@
 	if ([controller isKindOfClass:OakProjectController]) {
 		[[[[[NSApp mainMenu] itemWithTitle:@"View"] submenu] itemWithTitle:@"Terminal"] setHidden:NO];
 		[[Terminal instance] setLastWindowController:controller];
+		[[Terminal instance] setLastTerminalWindowController:[controller terminalController]];
 	} else if ([controller isKindOfClass:OakDocumentController]){
 		[[[[[NSApp mainMenu] itemWithTitle:@"View"] submenu] itemWithTitle:@"Terminal"] setHidden:YES];
 	}

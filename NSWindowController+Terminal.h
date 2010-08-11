@@ -8,13 +8,15 @@
 
 #import <Cocoa/Cocoa.h>
 @class KFSplitView;
+@class TerminalWindowController;
 
 @interface NSWindowController (NSWindowControllerTerminal) 
 
-- (KFSplitView*)getSplitView;
+-	(KFSplitView*)getSplitView;
 -	(void)toggleTerminal;
 -	(void)toggleTerminalFocus;
 -	(void)T_windowDidLoad;
+-	(TerminalWindowController *)terminalController;
 
 
 @end

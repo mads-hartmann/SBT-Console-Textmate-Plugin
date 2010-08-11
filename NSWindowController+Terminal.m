@@ -39,6 +39,12 @@
 	return (KFSplitView*)[ivars objectForKey:@"splitView"];
 }
 
+- (TerminalWindowController *)terminalController
+{
+	NSMutableDictionary* ivars = [[Terminal instance] getIVarsFor:self];
+	return (TerminalWindowController*)[ivars objectForKey:@"terminalController"];
+}
+
 - (void)toggleTerminalFocus
 {
 	NSMutableDictionary* ivars = [[Terminal instance] getIVarsFor:self];
@@ -47,7 +53,6 @@
 		[self toggleTerminal];
 	}
 	Terminal *instance = [Terminal instance];
-	NSLog(@"%@",[[[instance lastWindowController] window] firstResponder]);
 	if ([[[[instance lastWindowController] window] firstResponder] isKindOfClass:OakTextView]){
 		[[[instance lastWindowController] window] makeFirstResponder:[[instance lastTerminalWindowController] input]];
 	} else {
@@ -56,11 +61,11 @@
 
 }
 
+
 - (void)toggleTerminal
 {
 	NSMutableDictionary* ivars = [[Terminal instance] getIVarsFor:self];
 	KFSplitView *splitView = [ivars objectForKey:@"splitView"];
-	
 	// Creat the drawer if it doesn't exist.
 	if (splitView == nil){
 		// Create the content for the drawer. (hacky, but it needs an owner)
@@ -71,6 +76,7 @@
 		// setting the project path
 		[controller setProjectDir:[self projectDirectory]];
 		[controller setPathToSbt:[self SBTPath]];
+		[ivars setObject:controller forKey:@"terminalController"];
 		[[Terminal instance] setLastTerminalWindowController:controller];
 		NSView *terminalView = [[controller window] contentView];
 		[terminalView retain];
