@@ -58,9 +58,7 @@
 	} else {
 		[[[instance lastWindowController] window] makeFirstResponder:[self textView]];
 	}
-
 }
-
 
 - (void)toggleTerminal
 {
