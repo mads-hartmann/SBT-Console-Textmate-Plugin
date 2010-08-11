@@ -7,6 +7,7 @@
 //
 
 #import "TerminalWindowController.h"
+#import "Terminal.h"
 
 @implementation TerminalWindowController
 
@@ -52,6 +53,8 @@
 	} else {
 		[self writeSingleLine:currentLine];
 		[self writeSomeText:@"> "];
+		[[[[Terminal instance] lastWindowController] window] makeFirstResponder:input];
+		[[[[Terminal instance] lastTerminalWindowController] window] makeFirstResponder:input];
 	}
 }
 
@@ -69,7 +72,6 @@
 			[self runCommand:command];
 	}
 	[input setStringValue:@""];
-	[[self window] makeFirstResponder:input];
 }
 
 /*	
