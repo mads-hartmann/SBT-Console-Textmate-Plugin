@@ -53,6 +53,8 @@
 	} else {
 		[self writeSingleLine:currentLine];
 		[self writeSomeText:@"> "];
+		// uhm, make the input the first responder no matter what. 
+		[input setEnabled:true];
 		[[[[Terminal instance] lastWindowController] window] makeFirstResponder:input];
 		[[[[Terminal instance] lastTerminalWindowController] window] makeFirstResponder:input];
 	}
@@ -72,6 +74,7 @@
 			[self runCommand:command];
 	}
 	[input setStringValue:@""];
+	[input setEnabled:false];
 }
 
 /*	
