@@ -53,8 +53,6 @@
 	} else {
 		[self writeSingleLine:currentLine];
 		[self writeSomeText:@"> "];
-		// uhm, make the input the first responder no matter what. 
-		[input setEnabled:true];
 		[self focusInputField];
 	}
 }
@@ -70,8 +68,7 @@
 	NSString *str = [NSString stringWithFormat:@"%@%@", [input stringValue], @"\n"];
 	[self writeSomeText:str];
 	if( _task && [_task isRunning]) {
-		NSString *stop = @"\n";
-		[_fileHandleWriting writeData:[stop dataUsingEncoding:NSUTF8StringEncoding]];
+		[_fileHandleWriting writeData:[str dataUsingEncoding:NSUTF8StringEncoding]];
 		[_fileHandleReading readInBackgroundAndNotify];
 	} else {
 		NSString *command = [input stringValue];
@@ -79,7 +76,6 @@
 			[self runCommand:command];
 	}
 	[input setStringValue:@""];
-	[input setEnabled:false];
 }
 
 /*	
