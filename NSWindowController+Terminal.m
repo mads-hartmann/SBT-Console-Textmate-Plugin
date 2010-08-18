@@ -110,8 +110,12 @@
 			[splitView addSubview:realDocumentView];
 			[splitView addSubview:terminalView];
 			
-			[preExistingSplitView addSubview:splitView];    
-			
+			if (ppSidebarIsOnRight)
+				[preExistingSplitView addSubview:splitView];
+			[preExistingSplitView addSubview:originalSidePane];
+			if (!ppSidebarIsOnRight)
+				[preExistingSplitView addSubview:splitView]; 
+    			
 			[realDocumentView release];
 			[originalSidePane release];
 		} else { // no relevant plugins present, init in contentView of Window
@@ -130,9 +134,11 @@
 		[documentView release];
 		[[[Terminal instance] lastTerminalWindowController] focusInputField];
 	} else {
+		NSLog(@"testteststese");
 		BOOL isCollapsed = [splitView isSubviewCollapsed:[[splitView subviews] objectAtIndex:1]];
 		if (isCollapsed) {
 			[splitView setSubview:[[splitView subviews] objectAtIndex:1] isCollapsed:0];
+			[[[splitView subviews] objectAtIndex:1] setFrameSize:NSMakeSize([[self window] frame].size.width , 200)];
 			[[[Terminal instance] lastTerminalWindowController] focusInputField];
 		} else {
 			[splitView setSubview:[[splitView subviews] objectAtIndex:1] isCollapsed:1];
