@@ -9,6 +9,10 @@
 #import "TerminalWindowController.h"
 #import "Terminal.h"
 
+@interface TerminalWindowController (private)
+- (bool)mayContainPath:(NSString *)string;
+@end
+
 @implementation TerminalWindowController
 
 @synthesize input, output, terminalMenu, projectDir, pathToSbt, currentLine;
@@ -145,9 +149,10 @@
 	NSMutableAttributedString *aString = [[NSMutableAttributedString alloc] initWithString:string];
 	
 	// adding the link attribute if it is applicable
-	if ([string rangeOfString:[NSString stringWithFormat:@"[error] %@",projectDir]].location != NSNotFound){
+	if ([self mayContainPath:string]){
 		NSMutableString *path = [[NSMutableString alloc] initWithString:string];
-		[path deleteCharactersInRange:NSMakeRange(0, 8)]; // remove [error]\s
+		int i = [string rangeOfString:@"/"].location;
+		[path deleteCharactersInRange:NSMakeRange(0, i)];
 		
 		NSArray *chunks = [path componentsSeparatedByString:@":"];
 		[chunks retain];
@@ -199,6 +204,11 @@
 	return [aString autorelease];
 }
 
+-(bool)mayContainPath:(NSString *)string
+{
+	return (([string rangeOfString:[NSString stringWithFormat:@"[error] %@",projectDir]].location != NSNotFound) || 
+			([string rangeOfString:[NSString stringWithFormat:@"[warn] %@",projectDir]].location != NSNotFound));
+}
 
 -(void)runCommand:(NSString *)command
 {
