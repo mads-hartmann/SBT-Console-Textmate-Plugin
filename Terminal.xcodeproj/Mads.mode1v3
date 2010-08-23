@@ -276,7 +276,9 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>26</integer>
+									<integer>10</integer>
+									<integer>8</integer>
+									<integer>7</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -300,7 +302,7 @@
 							<real>278</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>57 193 1422 835 0 0 1680 1028 </string>
+						<string>4 43 1422 835 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -318,7 +320,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>TerminalWindowController.m</string>
+								<string>NSWindowController+Terminal.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -326,11 +328,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>TerminalWindowController.m</string>
+										<string>NSWindowController+Terminal.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>0935EFBE121C0AF40001F2B9</string>
+										<string>092BDD3612212CAD00BAF374</string>
 										<key>history</key>
 										<array>
 											<string>099D18DD11F8B11700DE90DB</string>
@@ -340,12 +342,12 @@
 											<string>096F243A1208872E009BA39F</string>
 											<string>09176F5412134239006CDED3</string>
 											<string>09176F5612134239006CDED3</string>
-											<string>09176F5D121342BE006CDED3</string>
 											<string>09176F6412134333006CDED3</string>
 											<string>09176F74121343A9006CDED3</string>
-											<string>09176F7A121348EE006CDED3</string>
 											<string>0935EF9F121C06160001F2B9</string>
-											<string>0935EFA0121C06160001F2B9</string>
+											<string>09BAC189121C551F00D83A66</string>
+											<string>09BAC18A121C551F00D83A66</string>
+											<string>09BAC18B121C551F00D83A66</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -359,7 +361,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {1122, 789}}</string>
 								<key>RubberWindowFrame</key>
-								<string>57 193 1422 835 0 0 1680 1028 </string>
+								<string>4 43 1422 835 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -379,7 +381,7 @@
 								<key>Frame</key>
 								<string>{{0, 794}, {1122, 0}}</string>
 								<key>RubberWindowFrame</key>
-								<string>57 193 1422 835 0 0 1680 1028 </string>
+								<string>4 43 1422 835 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -403,9 +405,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>0935EF8A121C04B00001F2B9</string>
+				<string>092BDD331220987300BAF374</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>0935EF8B121C04B00001F2B9</string>
+				<string>092BDD341220987300BAF374</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -547,7 +549,7 @@
 		<string>/Users/Mads/dev/projects/textmate_console_plugin/Terminal.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>57 193 1422 835 0 0 1680 1028 </string>
+	<string>4 43 1422 835 0 0 1440 878 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -577,7 +579,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {1070, 455}}</string>
 								<key>RubberWindowFrame</key>
-								<string>142 56 1070 737 0 0 1680 1028 </string>
+								<string>86 56 1070 737 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -601,7 +603,7 @@
 								<key>Frame</key>
 								<string>{{0, 460}, {1070, 236}}</string>
 								<key>RubberWindowFrame</key>
-								<string>142 56 1070 737 0 0 1680 1028 </string>
+								<string>86 56 1070 737 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXBuildResultsModule</string>
@@ -624,7 +626,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>0998EAF811C1237100D5D4EF</string>
-				<string>0935EF8C121C04B00001F2B9</string>
+				<string>092BDD351220987300BAF374</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -633,7 +635,7 @@
 			<key>WindowContentMinSize</key>
 			<string>486 300</string>
 			<key>WindowString</key>
-			<string>142 56 1070 737 0 0 1680 1028 </string>
+			<string>86 56 1070 737 0 0 1440 878 </string>
 			<key>WindowToolGUID</key>
 			<string>0998EAF811C1237100D5D4EF</string>
 			<key>WindowToolIsVisible</key>

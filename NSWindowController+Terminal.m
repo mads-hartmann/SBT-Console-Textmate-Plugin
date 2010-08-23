@@ -134,7 +134,6 @@
 		[documentView release];
 		[[[Terminal instance] lastTerminalWindowController] focusInputField];
 	} else {
-		NSLog(@"testteststese");
 		BOOL isCollapsed = [splitView isSubviewCollapsed:[[splitView subviews] objectAtIndex:1]];
 		if (isCollapsed) {
 			[splitView setSubview:[[splitView subviews] objectAtIndex:1] isCollapsed:0];
