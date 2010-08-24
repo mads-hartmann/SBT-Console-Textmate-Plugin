@@ -15,7 +15,7 @@
 
 @implementation TerminalWindowController
 
-@synthesize input, output, terminalMenu, projectDir, pathToSbt, currentLine;
+@synthesize input, output, terminalMenu, projectDir, pathToSbt;
 
 - (id)initWithWindowNibPath:(NSString *)windowNibPath owner:(id)owner
 {	
@@ -24,7 +24,7 @@
 											 selector:@selector( readPipe: )
 												 name:NSFileHandleReadCompletionNotification 
 											   object:nil];
-	[self setCurrentLine:[NSMutableString stringWithCapacity:256]];
+	lastAnalyzedRange = NSMakeRange(0, 0);
 	return self;
 }
 
@@ -51,20 +51,30 @@
 		[text release];
         [_fileHandleReading readInBackgroundAndNotify];
 	} else { // it's done
-		[self writeSomeText:@"> "];
+		[self write:@"> "];
 		[self analyze];
 	}
 }
 
 - (void)analyze
 {
+	NSLog(@"Started analyzing");
 	NSString *text = [[output textStorage] string];
-	NSArray *lines = [text componentsSeparatedByString:@"\n"];
-	for (NSString *line in lines) {
-		NSAttributedString *aString = [self createAttributedString:line];
-		NSRange r = [text rangeOfString:line];
-		[[output textStorage] replaceCharactersInRange:r withAttributedString:aString];
-	}
+	NSRange range = NSMakeRange(0, [text length]);
+	NSLog(@"%i",[[output textStorage] length]);
+	NSLog(@"%i,%i", range.location, range.length);
+	
+	[text enumerateSubstringsInRange:range 
+													 options:NSStringEnumerationByLines 
+												usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) 
+	{
+		NSLog(@"In the block");
+		NSLog(@"%i,%i", substringRange.location, substringRange.length);
+		NSAttributedString *aString = [self createAttributedString:substring];
+		[[output textStorage] replaceCharactersInRange:substringRange withAttributedString:aString];														
+	}];
+	lastAnalyzedRange = range;
+	NSLog(@"done analyzing");
 }
 
 - (void)focusInputField 
@@ -76,7 +86,7 @@
 - (IBAction)enter:(id)sender
 {
 	NSString *str = [NSString stringWithFormat:@"%@%@", [input stringValue], @"\n"];
-	[self writeSomeText:str];
+	[self write:str];
 	if( _task && [_task isRunning]) {
 		[_fileHandleWriting writeData:[str dataUsingEncoding:NSUTF8StringEncoding]];
 		[_fileHandleReading readInBackgroundAndNotify];
@@ -134,27 +144,27 @@
 	if ([string rangeOfString:@"[error]"].location != NSNotFound) {
 		[aString addAttribute:NSForegroundColorAttributeName 
 						value:[NSColor colorWithCalibratedRed:0.761 green:0.212 blue:0.106 alpha:1] 
-						range:NSMakeRange(0, [aString length]-1)];
+						range:NSMakeRange(0, [aString length])];
 	}
 	else if([string rangeOfString:@"[success]"].location != NSNotFound) {
 		[aString addAttribute:NSForegroundColorAttributeName 
 						value:[NSColor colorWithCalibratedRed:0.125 green:0.729 blue:0.149 alpha:1]
-						range:NSMakeRange(0, [aString length]-1)];
+						range:NSMakeRange(0, [aString length])];
 	}
 	else if([string rangeOfString:@"[warn]"].location != NSNotFound) {
 		[aString addAttribute:NSForegroundColorAttributeName 
 						value:[NSColor colorWithCalibratedRed:0.682 green:0.647 blue:0.165 alpha:1]
-						range:NSMakeRange(0, [aString length]-1)];
+						range:NSMakeRange(0, [aString length])];
 	}
 	else if([string rangeOfString:@"[info] =="].location != NSNotFound) {
 		[aString addAttribute:NSForegroundColorAttributeName 
 						value:[NSColor colorWithCalibratedRed:0.278 green:0.180 blue:0.882 alpha:1]
-						range:NSMakeRange(0, [aString length]-1)];
+						range:NSMakeRange(0, [aString length])];
 	}
 	else {
 		[aString addAttribute:NSForegroundColorAttributeName 
 						value:[NSColor blackColor]
-						range:NSMakeRange(0, [aString length]-1)];
+						range:NSMakeRange(0, [aString length])];
 	}
 	return [aString autorelease];
 }
@@ -202,8 +212,6 @@
 -(void)dealloc
 {
 	NSLog(@"deallocing TerminalWindowController");
-	[currentLine release];
-	currentLine = nil;
 	[[NSNotificationCenter defaultCenter] removeObserver:self];	
 	[super dealloc];
 }

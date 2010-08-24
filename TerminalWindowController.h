@@ -24,15 +24,12 @@
 	
 	NSString *projectDir;
 	NSString *pathToSbt;
-	
-	NSMutableString *currentLine; 
+	NSRange lastAnalyzedRange;
 		
 }
 
 -	(void)runCommand:(NSString *)command;
 -	(void)write:(NSString *)string;
--	(void)writeSomeText:(NSString *)string;
--	(void)writeSingleLine:(NSString *)string;
 -	(void)focusInputField;
 -	(NSAttributedString*)createAttributedString:(NSString*)string;
 -	(void)analyze;
@@ -42,7 +39,6 @@
 
 @property (retain) NSString *projectDir;
 @property (retain) NSString *pathToSbt;
-@property (retain) NSMutableString *currentLine;
 @property (assign) IBOutlet NSTextView *output;
 @property (assign) IBOutlet NSTextField *input;
 @property (assign) IBOutlet	NSMenuItem *terminalMenu;
