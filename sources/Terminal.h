@@ -22,10 +22,17 @@
 	NSWindowController* lastWindowController;
 	TerminalWindowController* lastTerminalWindowController;
 	NSMutableDictionary* iVars;
+	
+	// preference related
+	IBOutlet NSView* preferencesView;
+	NSImage* iconImage;
+	NSWindowController* prefWindowController;
 }
 
 @property(retain) NSWindowController* lastWindowController;
 @property(retain) TerminalWindowController* lastTerminalWindowController;
+@property(retain, readonly) NSImage* iconImage;
+@property(retain, readonly) NSView* preferencesView;
 
 + (Terminal*)instance;
 - (id)initWithPlugInController:(id <TMPlugInController>)aController;

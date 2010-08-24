@@ -13,6 +13,8 @@
 		09FDE4A312244AD000F394B4 /* NSWindowController+Terminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FDE49A12244AD000F394B4 /* NSWindowController+Terminal.m */; };
 		09FDE4A412244AD000F394B4 /* Terminal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 09FDE49C12244AD000F394B4 /* Terminal.mm */; };
 		09FDE4A512244AD000F394B4 /* TerminalWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FDE49E12244AD000F394B4 /* TerminalWindowController.m */; };
+		09FDE4AA12244CED00F394B4 /* NSWindowController+Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FDE4A912244CED00F394B4 /* NSWindowController+Preferences.m */; };
+		09FDE4B912244EBD00F394B4 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09FDE4B712244EBD00F394B4 /* Preferences.xib */; };
 		17B8A10E0913378100E243E7 /* Terminal.nib in Resources */ = {isa = PBXBuildFile; fileRef = 17B8A10C0913378100E243E7 /* Terminal.nib */; };
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
@@ -36,6 +38,9 @@
 		09FDE49D12244AD000F394B4 /* TerminalWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerminalWindowController.h; sourceTree = "<group>"; };
 		09FDE49E12244AD000F394B4 /* TerminalWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalWindowController.m; sourceTree = "<group>"; };
 		09FDE49F12244AD000F394B4 /* TextMate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextMate.h; sourceTree = "<group>"; };
+		09FDE4A812244CED00F394B4 /* NSWindowController+Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindowController+Preferences.h"; sourceTree = "<group>"; };
+		09FDE4A912244CED00F394B4 /* NSWindowController+Preferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindowController+Preferences.m"; sourceTree = "<group>"; };
+		09FDE4B812244EBD00F394B4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Preferences.xib; sourceTree = "<group>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		17B8A10D0913378100E243E7 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Terminal.nib; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* Terminal.tmplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Terminal.tmplugin; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +84,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				09FDE4B712244EBD00F394B4 /* Preferences.xib */,
 				17B8A10C0913378100E243E7 /* Terminal.nib */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
@@ -89,6 +95,8 @@
 		09FDE49212244AD000F394B4 /* sources */ = {
 			isa = PBXGroup;
 			children = (
+				09FDE4A812244CED00F394B4 /* NSWindowController+Preferences.h */,
+				09FDE4A912244CED00F394B4 /* NSWindowController+Preferences.m */,
 				09FDE49312244AD000F394B4 /* JRSwizzle.h */,
 				09FDE49412244AD000F394B4 /* JRSwizzle.m */,
 				09FDE49512244AD000F394B4 /* KFSplitView.h */,
@@ -186,6 +194,7 @@
 			files = (
 				8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */,
 				17B8A10E0913378100E243E7 /* Terminal.nib in Resources */,
+				09FDE4B912244EBD00F394B4 /* Preferences.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +227,7 @@
 				09FDE4A312244AD000F394B4 /* NSWindowController+Terminal.m in Sources */,
 				09FDE4A412244AD000F394B4 /* Terminal.mm in Sources */,
 				09FDE4A512244AD000F394B4 /* TerminalWindowController.m in Sources */,
+				09FDE4AA12244CED00F394B4 /* NSWindowController+Preferences.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +240,14 @@
 				089C167EFE841241C02AAC07 /* English */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		09FDE4B712244EBD00F394B4 /* Preferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				09FDE4B812244EBD00F394B4 /* English */,
+			);
+			name = Preferences.xib;
 			sourceTree = "<group>";
 		};
 		17B8A10C0913378100E243E7 /* Terminal.nib */ = {

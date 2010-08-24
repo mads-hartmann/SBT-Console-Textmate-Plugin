@@ -14,7 +14,7 @@
 
 @implementation Terminal
 
-@synthesize lastWindowController, lastTerminalWindowController;
+@synthesize lastWindowController, lastTerminalWindowController, iconImage, preferencesView;
 
 static Terminal *sharedInstance = nil;
 
@@ -44,6 +44,28 @@ static Terminal *sharedInstance = nil;
 		[OakDocumentController jr_swizzleMethod:@selector(windowDidLoad) withMethod:@selector(T_windowDidLoad) error:NULL];		
 	}
 	sharedInstance = self;
+	
+	//image
+	NSString* iconPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"textmate-minimap" ofType:@"tiff"];
+    iconImage = [[NSImage alloc] initByReferencingFile:iconPath];
+	
+	//preference
+	NSString* nibPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"Preferences" ofType:@"nib"];
+    prefWindowController = [[NSWindowController alloc] initWithWindowNibPath:nibPath owner:self];
+    [prefWindowController showWindow:self];
+	
+	[OakPreferencesManager jr_swizzleMethod:@selector(windowWillClose:) withMethod:@selector(Console_PrefWindowWillClose:) error:NULL];
+    [OakPreferencesManager jr_swizzleMethod:@selector(toolbarAllowedItemIdentifiers:) 
+                                 withMethod:@selector(Console_toolbarAllowedItemIdentifiers:) error:NULL];
+    [OakPreferencesManager jr_swizzleMethod:@selector(toolbarDefaultItemIdentifiers:) 
+                                 withMethod:@selector(Console_toolbarDefaultItemIdentifiers:) error:NULL];
+    [OakPreferencesManager jr_swizzleMethod:@selector(toolbarSelectableItemIdentifiers:) 
+                                 withMethod:@selector(Console_toolbarSelectableItemIdentifiers:) error:NULL];
+    [OakPreferencesManager jr_swizzleMethod:@selector(toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar:) 
+                                 withMethod:@selector(Console_toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar:) error:NULL];
+    [OakPreferencesManager jr_swizzleMethod:@selector(selectToolbarItem:) withMethod:@selector(Console_selectToolbarItem:) error:NULL];
+	
+	
 	return self;
 }
 
