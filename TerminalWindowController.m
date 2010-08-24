@@ -43,21 +43,27 @@
 	
     data = [[notification userInfo] 
             objectForKey:NSFileHandleNotificationDataItem];
-    text = [[NSString alloc] initWithData:data 
-								 encoding:NSUTF8StringEncoding];
-	// only write if there's something interesting
-	if (![text isEqualToString:@""])
-		[self write:text];
-	
-    [text release];
 
-    if( _task && [data length] != 0) {
-		// Keep reading if it isn't empty
+    if( _task && [data length] != 0) { // Keep reading if it isn't empty	
+		text = [[NSString alloc] initWithData:data 
+									 encoding:NSUTF8StringEncoding];
+		[self write:text];
+		[text release];
         [_fileHandleReading readInBackgroundAndNotify];
-	} else {
-		[self writeSingleLine:currentLine];
+	} else { // it's done
 		[self writeSomeText:@"> "];
-		[self focusInputField];
+		[self analyze];
+	}
+}
+
+- (void)analyze
+{
+	NSString *text = [[output textStorage] string];
+	NSArray *lines = [text componentsSeparatedByString:@"\n"];
+	for (NSString *line in lines) {
+		NSAttributedString *aString = [self createAttributedString:line];
+		NSRange r = [text rangeOfString:line];
+		[[output textStorage] replaceCharactersInRange:r withAttributedString:aString];
 	}
 }
 
@@ -79,72 +85,21 @@
 		if ([command length] > 0)
 			[self runCommand:command];
 	}
+	[self focusInputField];
 	[input setStringValue:@""];
 }
 
-/*	
- *	Writes a message to the TextView. It will only print the message if it contains a newline char (\n).
- *	If it doesn't it adds to string to a local variable and keeps doing to untill it hits a line line.
- *	This methods also takes care of hightlightig the text appropriately (red for errors etc.).
- */
+
 -(void)write:(NSString *)string
 {
-	[string retain];
-
-	if([string rangeOfString:@"\n"].location == NSNotFound){
-		// there a no newlines. This most be a continuation of some earlier ouput
-		if ([string length] > 0 && [[string substringToIndex:1] isEqualToString:@"["]) {
-			[self writeSingleLine:currentLine];
-			[currentLine setString:string];	
-		} else {
-			[currentLine appendString:string];
-		}
-	} else {
-		// there are many newlines. 
-		NSArray *lines = [string componentsSeparatedByString: @"\n"];
-		[lines retain];
-		for(NSString *line in lines) {
-			if ( [line length] == 0 ||
-				([line length] > 0 && 
-				 [[line substringToIndex:1] isEqualToString:@"["])) 
-			{
-				[self writeSingleLine:currentLine];
-				[currentLine setString:line];
-			} else {
-				[currentLine appendString:line];
-			}
-		}
-		[lines release];
-	}
-	[string release];
-}
-
--(void)writeSomeText:(NSString *)string {
-	NSAttributedString *aString = [self createAttributedString:string];
-	[aString retain];
-	[[output textStorage] appendAttributedString:aString];
+	[[output textStorage] appendAttributedString:[[NSAttributedString alloc] initWithString:string]];
 	[output scrollToEndOfDocument:self];
-	[aString release];
 }
 
-/* 
- *	Adds colors to the string using colorize and adds the string to output
+/**
+ *	This methods also takes care of hightlightig a single line of text appropriately (red for errors etc.).
+ *	It also creates links of any text with a path that includes the root folder of the current project
  */
--(void)writeSingleLine:(NSString *)string {
-
-	[string retain];
-	if (![string isEqualToString:@""]){
-		NSAttributedString *aString = [self createAttributedString:[string stringByAppendingString:@"\n"]];
-		[aString retain];
-		[[output textStorage] appendAttributedString:aString];
-		[output scrollToEndOfDocument:self];
-		[currentLine setString:@""];
-		[aString release];
-	}
-	[string release];
-
-}
-
 -(NSAttributedString*)createAttributedString:(NSString*)string {
 	NSMutableAttributedString *aString = [[NSMutableAttributedString alloc] initWithString:string];
 	
@@ -213,7 +168,7 @@
 -(void)runCommand:(NSString *)command
 {
 	[command retain];
-
+	
 	NSPipe *pipe = [NSPipe pipe];
 	NSPipe *pipeInput = [NSPipe pipe];
 	_fileHandleReading = [pipe fileHandleForReading];

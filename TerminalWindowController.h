@@ -35,6 +35,7 @@
 -	(void)writeSingleLine:(NSString *)string;
 -	(void)focusInputField;
 -	(NSAttributedString*)createAttributedString:(NSString*)string;
+-	(void)analyze;
 
 -	(IBAction)clearTerminal:(id)sender;
 -	(IBAction)enter:(id)sender;
