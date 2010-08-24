@@ -157,6 +157,7 @@
 			0999BA6F1223C63B005CDA4C /* PBXTextBookmark */ = 0999BA6F1223C63B005CDA4C /* PBXTextBookmark */;
 			0999BA741223C6E4005CDA4C /* PBXTextBookmark */ = 0999BA741223C6E4005CDA4C /* PBXTextBookmark */;
 			0999BA791223C740005CDA4C /* PBXTextBookmark */ = 0999BA791223C740005CDA4C /* PBXTextBookmark */;
+			0999BA7C1223C815005CDA4C /* PBXTextBookmark */ = 0999BA7C1223C815005CDA4C /* PBXTextBookmark */;
 			099D18DD11F8B11700DE90DB = 099D18DD11F8B11700DE90DB /* PBXTextBookmark */;
 			09A0D70D1222B9D0004D13DA = 09A0D70D1222B9D0004D13DA /* PBXTextBookmark */;
 			09BAC18A121C551F00D83A66 = 09BAC18A121C551F00D83A66 /* PBXTextBookmark */;
@@ -236,9 +237,9 @@
 	};
 	0926C38411F360ED00448AA8 /* TerminalWindowController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1038, 2951}}";
-			sepNavSelRange = "{1565, 0}";
-			sepNavVisRange = "{849, 2070}";
+			sepNavIntBoundsRect = "{{0, 0}, {1038, 2834}}";
+			sepNavSelRange = "{1969, 0}";
+			sepNavVisRange = "{849, 2179}";
 			sepNavWindowFrame = "{{19, 315}, {750, 558}}";
 		};
 	};
@@ -299,7 +300,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 65";
 		rLen = 0;
-		rLoc = 2158;
+		rLoc = 1941;
 		rType = 0;
 		vrLen = 1856;
 		vrLoc = 1052;
@@ -309,7 +310,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 65";
 		rLen = 0;
-		rLoc = 2158;
+		rLoc = 1941;
 		rType = 0;
 		vrLen = 2367;
 		vrLoc = 1052;
@@ -319,7 +320,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 65";
 		rLen = 0;
-		rLoc = 1677;
+		rLoc = 1553;
 		rType = 0;
 		vrLen = 2400;
 		vrLoc = 1052;
@@ -329,7 +330,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 68";
 		rLen = 0;
-		rLoc = 1677;
+		rLoc = 1553;
 		rType = 0;
 		vrLen = 2374;
 		vrLoc = 1052;
@@ -339,7 +340,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 65";
 		rLen = 0;
-		rLoc = 1677;
+		rLoc = 1553;
 		rType = 0;
 		vrLen = 2391;
 		vrLoc = 1052;
@@ -349,7 +350,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 65";
 		rLen = 0;
-		rLoc = 1677;
+		rLoc = 1553;
 		rType = 0;
 		vrLen = 2391;
 		vrLoc = 1052;
@@ -359,7 +360,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 65";
 		rLen = 0;
-		rLoc = 1677;
+		rLoc = 1553;
 		rType = 0;
 		vrLen = 2374;
 		vrLoc = 1052;
@@ -369,7 +370,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 64";
 		rLen = 0;
-		rLoc = 1677;
+		rLoc = 1553;
 		rType = 0;
 		vrLen = 2511;
 		vrLoc = 1052;
@@ -389,7 +390,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 84";
 		rLen = 0;
-		rLoc = 2543;
+		rLoc = 2299;
 		rType = 0;
 		vrLen = 2109;
 		vrLoc = 0;
@@ -399,7 +400,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 84";
 		rLen = 0;
-		rLoc = 2543;
+		rLoc = 2299;
 		rType = 0;
 		vrLen = 2793;
 		vrLoc = 2781;
@@ -409,7 +410,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 117";
 		rLen = 0;
-		rLoc = 3730;
+		rLoc = 3486;
 		rType = 0;
 		vrLen = 2793;
 		vrLoc = 2781;
@@ -419,7 +420,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 70";
 		rLen = 0;
-		rLoc = 2158;
+		rLoc = 1941;
 		rType = 0;
 		vrLen = 2118;
 		vrLoc = 836;
@@ -458,7 +459,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 70";
 		rLen = 0;
-		rLoc = 2158;
+		rLoc = 1941;
 		rType = 0;
 		vrLen = 2118;
 		vrLoc = 836;
@@ -537,7 +538,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 63";
 		rLen = 0;
-		rLoc = 1677;
+		rLoc = 1553;
 		rType = 0;
 		vrLen = 2528;
 		vrLoc = 1072;
@@ -547,7 +548,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 68";
 		rLen = 0;
-		rLoc = 2158;
+		rLoc = 1941;
 		rType = 0;
 		vrLen = 2593;
 		vrLoc = 1352;
@@ -557,7 +558,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 160";
 		rLen = 0;
-		rLoc = 5625;
+		rLoc = 5381;
 		rType = 0;
 		vrLen = 2927;
 		vrLoc = 2884;
@@ -567,7 +568,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 60";
 		rLen = 0;
-		rLoc = 1534;
+		rLoc = 1504;
 		rType = 0;
 		vrLen = 2537;
 		vrLoc = 1273;
@@ -587,7 +588,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 60";
 		rLen = 0;
-		rLoc = 1534;
+		rLoc = 1504;
 		rType = 0;
 		vrLen = 2432;
 		vrLoc = 972;
@@ -597,7 +598,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 63";
 		rLen = 0;
-		rLoc = 1677;
+		rLoc = 1553;
 		rType = 0;
 		vrLen = 2251;
 		vrLoc = 491;
@@ -607,7 +608,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 65";
 		rLen = 0;
-		rLoc = 1677;
+		rLoc = 1553;
 		rType = 0;
 		vrLen = 2253;
 		vrLoc = 491;
@@ -617,7 +618,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 65";
 		rLen = 0;
-		rLoc = 1677;
+		rLoc = 1553;
 		rType = 0;
 		vrLen = 2253;
 		vrLoc = 491;
@@ -647,7 +648,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 69";
 		rLen = 0;
-		rLoc = 2158;
+		rLoc = 1941;
 		rType = 0;
 		vrLen = 2534;
 		vrLoc = 1014;
@@ -657,7 +658,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 62";
 		rLen = 0;
-		rLoc = 1677;
+		rLoc = 1553;
 		rType = 0;
 		vrLen = 2461;
 		vrLoc = 1014;
@@ -667,7 +668,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 62";
 		rLen = 0;
-		rLoc = 1677;
+		rLoc = 1553;
 		rType = 0;
 		vrLen = 2461;
 		vrLoc = 1014;
@@ -677,7 +678,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 68";
 		rLen = 0;
-		rLoc = 1901;
+		rLoc = 1754;
 		rType = 0;
 		vrLen = 2224;
 		vrLoc = 852;
@@ -687,7 +688,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 68";
 		rLen = 0;
-		rLoc = 1901;
+		rLoc = 1754;
 		rType = 0;
 		vrLen = 2224;
 		vrLoc = 852;
@@ -697,7 +698,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 62";
 		rLen = 0;
-		rLoc = 1581;
+		rLoc = 1551;
 		rType = 0;
 		vrLen = 2224;
 		vrLoc = 852;
@@ -707,7 +708,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 62";
 		rLen = 0;
-		rLoc = 1581;
+		rLoc = 1551;
 		rType = 0;
 		vrLen = 2224;
 		vrLoc = 852;
@@ -717,7 +718,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 72";
 		rLen = 0;
-		rLoc = 2186;
+		rLoc = 1969;
 		rType = 0;
 		vrLen = 2260;
 		vrLoc = 852;
@@ -727,7 +728,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 72";
 		rLen = 0;
-		rLoc = 2186;
+		rLoc = 1969;
 		rType = 0;
 		vrLen = 2260;
 		vrLoc = 852;
@@ -737,7 +738,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 65";
 		rLen = 0;
-		rLoc = 1677;
+		rLoc = 1553;
 		rType = 0;
 		vrLen = 2242;
 		vrLoc = 852;
@@ -747,7 +748,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 62";
 		rLen = 0;
-		rLoc = 1534;
+		rLoc = 1504;
 		rType = 0;
 		vrLen = 2200;
 		vrLoc = 852;
@@ -757,7 +758,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 63";
 		rLen = 0;
-		rLoc = 1565;
+		rLoc = 1535;
 		rType = 0;
 		vrLen = 2202;
 		vrLoc = 852;
@@ -767,7 +768,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 75";
 		rLen = 0;
-		rLoc = 2186;
+		rLoc = 1969;
 		rType = 0;
 		vrLen = 2162;
 		vrLoc = 852;
@@ -777,7 +778,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 75";
 		rLen = 0;
-		rLoc = 2186;
+		rLoc = 1969;
 		rType = 0;
 		vrLen = 2162;
 		vrLoc = 852;
@@ -787,7 +788,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 71";
 		rLen = 0;
-		rLoc = 1904;
+		rLoc = 1754;
 		rType = 0;
 		vrLen = 2093;
 		vrLoc = 849;
@@ -797,9 +798,19 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 63";
 		rLen = 0;
-		rLoc = 1565;
+		rLoc = 1535;
 		rType = 0;
 		vrLen = 2070;
+		vrLoc = 849;
+	};
+	0999BA7C1223C815005CDA4C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
+		name = "TerminalWindowController.m: 70";
+		rLen = 0;
+		rLoc = 1969;
+		rType = 0;
+		vrLen = 2179;
 		vrLoc = 849;
 	};
 	099D181111F89A8300DE90DB /* TextMate.h */ = {
@@ -871,7 +882,7 @@
 		fRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */;
 		name = "TerminalWindowController.m: 65";
 		rLen = 0;
-		rLoc = 2158;
+		rLoc = 1941;
 		rType = 0;
 		vrLen = 1856;
 		vrLoc = 1052;

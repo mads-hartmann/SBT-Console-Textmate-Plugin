@@ -58,23 +58,16 @@
 
 - (void)analyze
 {
-	NSLog(@"Started analyzing");
 	NSString *text = [[output textStorage] string];
-	NSRange range = NSMakeRange(0, [text length]);
-	NSLog(@"%i",[[output textStorage] length]);
-	NSLog(@"%i,%i", range.location, range.length);
-	
+	NSRange range = NSMakeRange(0, [text length]);	
 	[text enumerateSubstringsInRange:range 
 													 options:NSStringEnumerationByLines 
 												usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) 
 	{
-		NSLog(@"In the block");
-		NSLog(@"%i,%i", substringRange.location, substringRange.length);
 		NSAttributedString *aString = [self createAttributedString:substring];
 		[[output textStorage] replaceCharactersInRange:substringRange withAttributedString:aString];														
 	}];
 	lastAnalyzedRange = range;
-	NSLog(@"done analyzing");
 }
 
 - (void)focusInputField 
