@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0926C38511F360ED00448AA8 /* TerminalWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0926C38411F360ED00448AA8 /* TerminalWindowController.m */; };
-		098644B2120366E50052ACBB /* KFSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 098644B1120366E50052ACBB /* KFSplitView.m */; };
-		099D183511F89DFB00DE90DB /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 099D183411F89DFB00DE90DB /* JRSwizzle.m */; };
-		09D2FC6511F8CEE000007A40 /* NSWindowController+Terminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D2FC6411F8CEE000007A40 /* NSWindowController+Terminal.m */; };
-		09D2FC9911F8D68B00007A40 /* NSWindow+Terminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D2FC9811F8D68B00007A40 /* NSWindow+Terminal.m */; };
-		177E4DA309132A0F0064163D /* Terminal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 177E4DA209132A0F0064163D /* Terminal.mm */; };
+		09FDE4A012244AD000F394B4 /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FDE49412244AD000F394B4 /* JRSwizzle.m */; };
+		09FDE4A112244AD000F394B4 /* KFSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FDE49612244AD000F394B4 /* KFSplitView.m */; };
+		09FDE4A212244AD000F394B4 /* NSWindow+Terminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FDE49812244AD000F394B4 /* NSWindow+Terminal.m */; };
+		09FDE4A312244AD000F394B4 /* NSWindowController+Terminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FDE49A12244AD000F394B4 /* NSWindowController+Terminal.m */; };
+		09FDE4A412244AD000F394B4 /* Terminal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 09FDE49C12244AD000F394B4 /* Terminal.mm */; };
+		09FDE4A512244AD000F394B4 /* TerminalWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FDE49E12244AD000F394B4 /* TerminalWindowController.m */; };
 		17B8A10E0913378100E243E7 /* Terminal.nib in Resources */ = {isa = PBXBuildFile; fileRef = 17B8A10C0913378100E243E7 /* Terminal.nib */; };
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
@@ -22,21 +22,21 @@
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
-		0926C38311F360ED00448AA8 /* TerminalWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerminalWindowController.h; sourceTree = "<group>"; };
-		0926C38411F360ED00448AA8 /* TerminalWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalWindowController.m; sourceTree = "<group>"; };
 		092CF48411F8957600382E61 /* Clock_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clock_Prefix.pch; sourceTree = "<group>"; };
-		098644B0120366E50052ACBB /* KFSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFSplitView.h; sourceTree = "<group>"; };
-		098644B1120366E50052ACBB /* KFSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFSplitView.m; sourceTree = "<group>"; };
-		099D181111F89A8300DE90DB /* TextMate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextMate.h; sourceTree = "<group>"; };
-		099D183311F89DFB00DE90DB /* JRSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSwizzle.h; sourceTree = "<group>"; };
-		099D183411F89DFB00DE90DB /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSwizzle.m; sourceTree = "<group>"; };
-		09D2FC6311F8CEE000007A40 /* NSWindowController+Terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindowController+Terminal.h"; sourceTree = "<group>"; };
-		09D2FC6411F8CEE000007A40 /* NSWindowController+Terminal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindowController+Terminal.m"; sourceTree = "<group>"; };
-		09D2FC9711F8D68B00007A40 /* NSWindow+Terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindow+Terminal.h"; sourceTree = "<group>"; };
-		09D2FC9811F8D68B00007A40 /* NSWindow+Terminal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindow+Terminal.m"; sourceTree = "<group>"; };
+		09FDE49312244AD000F394B4 /* JRSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSwizzle.h; sourceTree = "<group>"; };
+		09FDE49412244AD000F394B4 /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSwizzle.m; sourceTree = "<group>"; };
+		09FDE49512244AD000F394B4 /* KFSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFSplitView.h; sourceTree = "<group>"; };
+		09FDE49612244AD000F394B4 /* KFSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFSplitView.m; sourceTree = "<group>"; };
+		09FDE49712244AD000F394B4 /* NSWindow+Terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindow+Terminal.h"; sourceTree = "<group>"; };
+		09FDE49812244AD000F394B4 /* NSWindow+Terminal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindow+Terminal.m"; sourceTree = "<group>"; };
+		09FDE49912244AD000F394B4 /* NSWindowController+Terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindowController+Terminal.h"; sourceTree = "<group>"; };
+		09FDE49A12244AD000F394B4 /* NSWindowController+Terminal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindowController+Terminal.m"; sourceTree = "<group>"; };
+		09FDE49B12244AD000F394B4 /* Terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terminal.h; sourceTree = "<group>"; };
+		09FDE49C12244AD000F394B4 /* Terminal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Terminal.mm; sourceTree = "<group>"; };
+		09FDE49D12244AD000F394B4 /* TerminalWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerminalWindowController.h; sourceTree = "<group>"; };
+		09FDE49E12244AD000F394B4 /* TerminalWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalWindowController.m; sourceTree = "<group>"; };
+		09FDE49F12244AD000F394B4 /* TextMate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextMate.h; sourceTree = "<group>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		177E4DA109132A0F0064163D /* Terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terminal.h; sourceTree = "<group>"; };
-		177E4DA209132A0F0064163D /* Terminal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Terminal.mm; sourceTree = "<group>"; };
 		17B8A10D0913378100E243E7 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Terminal.nib; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* Terminal.tmplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Terminal.tmplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -58,13 +58,11 @@
 		089C166AFE841209C02AAC07 /* Clock */ = {
 			isa = PBXGroup;
 			children = (
-				099D181011F89A6D00DE90DB /* Other Sources */,
-				08FB77AFFE84173DC02AAC07 /* Classes */,
+				09FDE49212244AD000F394B4 /* sources */,
 				32C88E010371C26100C91783 /* Other Sources */,
 				089C167CFE841241C02AAC07 /* Resources */,
 				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
-				17B8A10C0913378100E243E7 /* Terminal.nib */,
 			);
 			name = Clock;
 			sourceTree = "<group>";
@@ -81,45 +79,31 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				17B8A10C0913378100E243E7 /* Terminal.nib */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		08FB77AFFE84173DC02AAC07 /* Classes */ = {
+		09FDE49212244AD000F394B4 /* sources */ = {
 			isa = PBXGroup;
 			children = (
-				09D2FC6211F8CEBD00007A40 /* categories */,
-				177E4DA209132A0F0064163D /* Terminal.mm */,
-				177E4DA109132A0F0064163D /* Terminal.h */,
-				0926C38311F360ED00448AA8 /* TerminalWindowController.h */,
-				0926C38411F360ED00448AA8 /* TerminalWindowController.m */,
+				09FDE49312244AD000F394B4 /* JRSwizzle.h */,
+				09FDE49412244AD000F394B4 /* JRSwizzle.m */,
+				09FDE49512244AD000F394B4 /* KFSplitView.h */,
+				09FDE49612244AD000F394B4 /* KFSplitView.m */,
+				09FDE49712244AD000F394B4 /* NSWindow+Terminal.h */,
+				09FDE49812244AD000F394B4 /* NSWindow+Terminal.m */,
+				09FDE49912244AD000F394B4 /* NSWindowController+Terminal.h */,
+				09FDE49A12244AD000F394B4 /* NSWindowController+Terminal.m */,
+				09FDE49B12244AD000F394B4 /* Terminal.h */,
+				09FDE49C12244AD000F394B4 /* Terminal.mm */,
+				09FDE49D12244AD000F394B4 /* TerminalWindowController.h */,
+				09FDE49E12244AD000F394B4 /* TerminalWindowController.m */,
+				09FDE49F12244AD000F394B4 /* TextMate.h */,
 			);
-			name = Classes;
-			sourceTree = "<group>";
-		};
-		099D181011F89A6D00DE90DB /* Other Sources */ = {
-			isa = PBXGroup;
-			children = (
-				098644B0120366E50052ACBB /* KFSplitView.h */,
-				098644B1120366E50052ACBB /* KFSplitView.m */,
-				099D181111F89A8300DE90DB /* TextMate.h */,
-				099D183311F89DFB00DE90DB /* JRSwizzle.h */,
-				099D183411F89DFB00DE90DB /* JRSwizzle.m */,
-			);
-			name = "Other Sources";
-			sourceTree = "<group>";
-		};
-		09D2FC6211F8CEBD00007A40 /* categories */ = {
-			isa = PBXGroup;
-			children = (
-				09D2FC6311F8CEE000007A40 /* NSWindowController+Terminal.h */,
-				09D2FC6411F8CEE000007A40 /* NSWindowController+Terminal.m */,
-				09D2FC9711F8D68B00007A40 /* NSWindow+Terminal.h */,
-				09D2FC9811F8D68B00007A40 /* NSWindow+Terminal.m */,
-			);
-			name = categories;
+			path = sources;
 			sourceTree = "<group>";
 		};
 		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
@@ -228,12 +212,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				177E4DA309132A0F0064163D /* Terminal.mm in Sources */,
-				0926C38511F360ED00448AA8 /* TerminalWindowController.m in Sources */,
-				099D183511F89DFB00DE90DB /* JRSwizzle.m in Sources */,
-				09D2FC6511F8CEE000007A40 /* NSWindowController+Terminal.m in Sources */,
-				09D2FC9911F8D68B00007A40 /* NSWindow+Terminal.m in Sources */,
-				098644B2120366E50052ACBB /* KFSplitView.m in Sources */,
+				09FDE4A012244AD000F394B4 /* JRSwizzle.m in Sources */,
+				09FDE4A112244AD000F394B4 /* KFSplitView.m in Sources */,
+				09FDE4A212244AD000F394B4 /* NSWindow+Terminal.m in Sources */,
+				09FDE4A312244AD000F394B4 /* NSWindowController+Terminal.m in Sources */,
+				09FDE4A412244AD000F394B4 /* Terminal.mm in Sources */,
+				09FDE4A512244AD000F394B4 /* TerminalWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

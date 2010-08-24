@@ -60,13 +60,13 @@
 {
 	NSString *text = [[output textStorage] string];
 	NSRange range = NSMakeRange(0, [text length]);	
-	[text enumerateSubstringsInRange:range 
-													 options:NSStringEnumerationByLines 
-												usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) 
-	{
+	id myblock = ^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
 		NSAttributedString *aString = [self createAttributedString:substring];
 		[[output textStorage] replaceCharactersInRange:substringRange withAttributedString:aString];														
-	}];
+	};
+	[text enumerateSubstringsInRange:range 
+													 options:NSStringEnumerationByLines 
+												usingBlock:myblock];
 	lastAnalyzedRange = range;
 }
 
