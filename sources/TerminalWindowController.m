@@ -128,7 +128,13 @@
 -(void)write:(NSString *)string
 {
 	NSMutableAttributedString *aString = [[NSMutableAttributedString alloc] initWithString:string];
-	[aString addAttribute:NSFontAttributeName value:[output font] range:NSMakeRange(0, [aString length])];
+	
+	NSFont *font = [output font];
+	NSString *size = [NSString stringWithFormat:@"%i", [font pointSize]];
+	
+	[aString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [aString length])];
+	[aString addAttribute:NSFontSizeAttribute value:size range:NSMakeRange(0, [aString length])];
+	
 	
 	[[output textStorage] appendAttributedString:aString];
 	[output scrollToEndOfDocument:self];
@@ -224,8 +230,11 @@
 	}
 	
 
-	[aString addAttribute:NSFontAttributeName value:[output font] range:NSMakeRange(0, [aString length])];
-
+	NSFont *font = [output font];
+	NSString *size = [NSString stringWithFormat:@"%i", [font pointSize]];
+	
+	[aString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [aString length])];
+	[aString addAttribute:NSFontSizeAttribute value:size range:NSMakeRange(0, [aString length])];
 	
 	return [aString autorelease];
 }
