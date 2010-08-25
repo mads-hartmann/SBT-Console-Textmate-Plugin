@@ -105,7 +105,7 @@
  */
 -(NSAttributedString*)createAttributedString:(NSString*)string {
 	NSMutableAttributedString *aString = [[NSMutableAttributedString alloc] initWithString:string];
-	
+		
 	// adding the link attribute if it is applicable
 	if ([self mayContainPath:string]){
 		NSMutableString *path = [[NSMutableString alloc] initWithString:string];
@@ -133,30 +133,58 @@
 		[path release];
 	}
 	
+	// fetch colors from the defults
+	
+	NSColor * normalColor =nil;
+	NSData *normalData=[[NSUserDefaults standardUserDefaults] dataForKey:@"normalColor"];
+	if (normalData != nil)
+		normalColor =(NSColor *)[NSUnarchiver unarchiveObjectWithData:normalData];
+	
+	NSColor * warningColor =nil;
+	NSData *warningData=[[NSUserDefaults standardUserDefaults] dataForKey:@"warningColor"];
+	if (warningData != nil)
+		warningColor =(NSColor *)[NSUnarchiver unarchiveObjectWithData:warningData];
+	
+	NSColor * errorColor =nil;
+	NSData *errorData=[[NSUserDefaults standardUserDefaults] dataForKey:@"errorColor"];
+	if (errorData != nil)
+		errorColor =(NSColor *)[NSUnarchiver unarchiveObjectWithData:errorData];
+		
+	NSColor * successColor =nil;
+	NSData *successData=[[NSUserDefaults standardUserDefaults] dataForKey:@"successColor"];
+	if (successData != nil)
+		successColor =(NSColor *)[NSUnarchiver unarchiveObjectWithData:successData];
+	
+	NSColor * seperatorColor =nil;
+	NSData *seperatorData=[[NSUserDefaults standardUserDefaults] dataForKey:@"seperatorColor"];
+	if (seperatorData != nil)
+		seperatorColor =(NSColor *)[NSUnarchiver unarchiveObjectWithData:seperatorData];
+
+	
 	// adding the color attribute
 	if ([string rangeOfString:@"[error]"].location != NSNotFound) {
 		[aString addAttribute:NSForegroundColorAttributeName 
-						value:[NSColor colorWithCalibratedRed:0.761 green:0.212 blue:0.106 alpha:1] 
+						value:errorColor
 						range:NSMakeRange(0, [aString length])];
 	}
 	else if([string rangeOfString:@"[success]"].location != NSNotFound) {
 		[aString addAttribute:NSForegroundColorAttributeName 
-						value:[NSColor colorWithCalibratedRed:0.125 green:0.729 blue:0.149 alpha:1]
+						value:successColor
 						range:NSMakeRange(0, [aString length])];
 	}
 	else if([string rangeOfString:@"[warn]"].location != NSNotFound) {
 		[aString addAttribute:NSForegroundColorAttributeName 
-						value:[NSColor colorWithCalibratedRed:0.682 green:0.647 blue:0.165 alpha:1]
+						value:warningColor
 						range:NSMakeRange(0, [aString length])];
 	}
 	else if([string rangeOfString:@"[info] =="].location != NSNotFound) {
 		[aString addAttribute:NSForegroundColorAttributeName 
-						value:[NSColor colorWithCalibratedRed:0.278 green:0.180 blue:0.882 alpha:1]
+						value:seperatorColor
 						range:NSMakeRange(0, [aString length])];
 	}
 	else {
 		[aString addAttribute:NSForegroundColorAttributeName 
-						value:[NSColor blackColor]
+						value:normalColor
 						range:NSMakeRange(0, [aString length])];
 	}
 	return [aString autorelease];
