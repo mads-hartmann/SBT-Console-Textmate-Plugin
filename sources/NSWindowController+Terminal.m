@@ -144,6 +144,7 @@
 			[[[[Terminal instance] lastWindowController] window] makeFirstResponder:[self textView]];
 		}
 		[splitView resizeSubviewsWithOldSize:[splitView bounds].size]; // have to do this.
+		[[[Terminal instance] lastTerminalWindowController] scrollToEndOfConsole];
 	}
 }
 

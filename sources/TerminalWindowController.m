@@ -137,6 +137,10 @@
 	
 	
 	[[output textStorage] appendAttributedString:aString];
+	[self scrollToEndOfConsole];
+}
+
+- (void)scrollToEndOfConsole {
 	[output scrollToEndOfDocument:self];
 }
 
