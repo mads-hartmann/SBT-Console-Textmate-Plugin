@@ -13,6 +13,7 @@
 
 @interface TerminalWindowController : NSWindowController {
 
+	NSScrollView *outputContainer;
 	NSTextView *output;
 	NSTextField	*input;
 	NSMenu* windowMenu;
@@ -39,6 +40,7 @@
 
 @property (retain) NSString *projectDir;
 @property (retain) NSString *pathToSbt;
+@property (assign) IBOutlet NSScrollView *outputContainer;
 @property (assign) IBOutlet NSTextView *output;
 @property (assign) IBOutlet NSTextField *input;
 @property (assign) IBOutlet	NSMenuItem *terminalMenu;

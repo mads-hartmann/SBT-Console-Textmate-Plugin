@@ -15,7 +15,7 @@
 
 @implementation TerminalWindowController
 
-@synthesize input, output, terminalMenu, projectDir, pathToSbt;
+@synthesize input, output, terminalMenu, projectDir, pathToSbt, outputContainer;
 
 - (id)initWithWindowNibPath:(NSString *)windowNibPath owner:(id)owner
 {	
@@ -25,12 +25,44 @@
 												 name:NSFileHandleReadCompletionNotification 
 											   object:nil];
 	lastAnalyzedRange = NSMakeRange(0, 0);
+	
 	return self;
 }
 
 - (void)windowDidLoad
 {
-	[output setString:@"> "];
+
+	//
+	// Binding and setting defaults to the view.
+	
+	NSMutableDictionary *bindingOptions = [NSMutableDictionary dictionary];
+	[bindingOptions setObject:NSUnarchiveFromDataTransformerName
+					   forKey:@"NSValueTransformerName"];
+
+	// set the colors
+	
+	[input bind: @"backgroundColor"
+		   toObject: [NSUserDefaultsController sharedUserDefaultsController]
+		withKeyPath:@"values.backgroundColor"
+			options:bindingOptions];
+	[input bind: @"textColor"
+	   toObject: [NSUserDefaultsController sharedUserDefaultsController]
+	withKeyPath:@"values.normalColor"
+		options:bindingOptions];
+
+	[outputContainer bind: @"backgroundColor"
+		   toObject: [NSUserDefaultsController sharedUserDefaultsController]
+		withKeyPath:@"values.backgroundColor"
+			options:bindingOptions];
+	
+	// set the font
+	NSString *fontName = [[NSUserDefaults standardUserDefaults] stringForKey:@"OakTextViewNormalFontName"];
+	int fontSize = [[NSUserDefaults standardUserDefaults] integerForKey:@"OakTextViewNormalFontSize"];
+	NSFont *font = [NSFont fontWithName:fontName size:fontSize];
+	[input setFont:font];
+	[output setFont:font];
+
+	[self write:@"> "];
 }
 
 -(void)readPipe: (NSNotification *)notification
@@ -95,7 +127,10 @@
 
 -(void)write:(NSString *)string
 {
-	[[output textStorage] appendAttributedString:[[NSAttributedString alloc] initWithString:string]];
+	NSMutableAttributedString *aString = [[NSMutableAttributedString alloc] initWithString:string];
+	[aString addAttribute:NSFontAttributeName value:[output font] range:NSMakeRange(0, [aString length])];
+	
+	[[output textStorage] appendAttributedString:aString];
 	[output scrollToEndOfDocument:self];
 }
 
@@ -187,6 +222,11 @@
 						value:normalColor
 						range:NSMakeRange(0, [aString length])];
 	}
+	
+
+	[aString addAttribute:NSFontAttributeName value:[output font] range:NSMakeRange(0, [aString length])];
+
+	
 	return [aString autorelease];
 }
 
