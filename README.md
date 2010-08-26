@@ -1,28 +1,9 @@
 What is it
 ==========
 
-This is a Textmate plugin that adds a view at the bottom of a Textmate project window which allows you to type SBT commands like compile, test etc. It's equal to typing "> sbt compile" etc. in a terminal. This means that you can't use jetty-run because it starts sbt, runs the command and shuts down sbt. It doesn't start an interactive session. I will try to fix this as starting/stopping sbt adds useless overhead. You can still use ~compile though.
+This is a Textmate plugin that adds a view at the bottom of a Textmate project window which allows you to type SBT commands like compile, test etc. It's equal to typing "> sbt compile" etc. in a terminal. This means that you can't use jetty-run because it starts sbt, runs the command and shuts down sbt. It doesn't start an interactive session. I will try to fix this as starting/stopping sbt adds useless overhead. You can still use ~compile and ~jetty-run though.
 
 **NOTICE**: Most of the code is heavily inspired by the project [Textmate Minimap](http://github.com/JulianEberius/Textmate-Minimap "Textmate Minimap") by [Julian Eberius ](http://github.com/JulianEberius "Julian Eberius "). Also I haven't done much objective-c coding prior to this project so the code is really crazy - enter at own risk.
-
-
-Usage
-=====
-
-Simply open a Textmate project and press ctrl+shift+1 and it will toggle the terminal. Now you can type in any SBT command and see the input in the console-view. 
-
-cmd+shift+1 will toggle focus between the document and the console.
-
-Features
-========
-
-- Any errors in the output links to the correct line the the appropriate file.
-
-Todo
-====
-
-- Make short-keys for next error / previous error 
-- Implement "history" so you can pre key-up/key-down to cycle through previous commands
 
 Installation
 ============
@@ -34,3 +15,21 @@ Simply download the latest build from the Downloads page and add the SBT_PATH sh
 My SBT path is set like this: 
 
 <pre><code>SBT_PATH = /Users/Mads/dev/tools/sbt/sbtnocolors</code></pre>
+
+Usage
+=====
+
+Simply open a Textmate project and press ctrl+shift+1 and it will toggle the terminal. Now you can type in any SBT command and see the input in the console-view. 
+
+cmd+shift+1 will toggle focus between the document and the console.
+
+The plugin adds a preference tab where you can change the colors used to display errors/warnings etc.
+
+<a href="http://farm5.static.flickr.com/4074/4928878266_5f43a9dd7a_b.jpg" style="float:left"><img src="http://farm5.static.flickr.com/4074/4928878266_5f43a9dd7a_m.jpg" alt="Console"></a>
+
+<a href="http://farm5.static.flickr.com/4140/4928284269_c77164c5b6_b.jpg" style="float:left">
+<img src="http://farm5.static.flickr.com/4140/4928284269_c77164c5b6_m.jpg" alt="Preference Pance" /></a>
+
+<a href="http://farm5.static.flickr.com/4116/4928295507_085e2d9b2f_b.jpg" style="float:left;">
+  <img src="http://farm5.static.flickr.com/4116/4928295507_085e2d9b2f_m.jpg" alt="Console with errors" />
+</a>
