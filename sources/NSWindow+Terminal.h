@@ -13,6 +13,5 @@
 
 // called when the user switches windows
 - (void)T_becomeMainWindow;
-- (void)T_setRepresentedFilename:(NSString*)aPath;
 
 @end

@@ -31,9 +31,4 @@
 	}
 }
 
-- (void)T_setRepresentedFilename:(NSString*)aPath
-{
-
-}
-
 @end

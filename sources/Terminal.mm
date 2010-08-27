@@ -38,7 +38,6 @@ static Terminal *sharedInstance = nil;
 		
 		iVars = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
 		
-		[OakWindow jr_swizzleMethod:@selector(setRepresentedFilename:) withMethod:@selector(T_setRepresentedFilename:) error:NULL];
 		[OakWindow jr_swizzleMethod:@selector(becomeMainWindow) withMethod:@selector(T_becomeMainWindow) error:NULL];
 		[OakProjectController jr_swizzleMethod:@selector(windowDidLoad) withMethod:@selector(T_windowDidLoad) error:NULL];		
 		[OakDocumentController jr_swizzleMethod:@selector(windowDidLoad) withMethod:@selector(T_windowDidLoad) error:NULL];		
