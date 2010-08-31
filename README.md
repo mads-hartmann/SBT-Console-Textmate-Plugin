@@ -1,12 +1,14 @@
-What is it
-==========
+About
+=====
 
-This is a Textmate plugin that adds a view at the bottom of a Textmate project window which allows you to type SBT commands like compile, test etc. It's equal to typing "> sbt compile" etc. in a terminal. This means that you can't use jetty-run because it starts sbt, runs the command and shuts down sbt. It doesn't start an interactive session. I will try to fix this as starting/stopping sbt adds useless overhead. You can still use ~compile and ~jetty-run though.
+This is a Textmate plugin that adds a view at the bottom of a Textmate project window which allows you to type SBT commands like compile, test etc. 
 
-**NOTICE**: Most of the code is heavily inspired by the project [Textmate Minimap](http://github.com/JulianEberius/Textmate-Minimap "Textmate Minimap") by [Julian Eberius ](http://github.com/JulianEberius "Julian Eberius "). Also I haven't done much objective-c coding prior to this project so the code is really crazy - enter at own risk.
+To start an interactive sbt session simply type <code>sbt</code> or <code>sbt shell</code>. Once started you can exit it at any time by typing quit (as you would in the terminal). If you just want to run a single command you can just type <code>sbt compile</code>etc. 
 
-Installation
-============
+**NOTICE**: Most of the code is heavily inspired by the project [Textmate Minimap](http://github.com/JulianEberius/Textmate-Minimap "Textmate Minimap") by [Julian Eberius ](http://github.com/JulianEberius "Julian Eberius ").
+
+How to: Install
+===============
 
 Simply download the latest build from the Downloads page and add the SBT_PATH shell variable in Textmate. It has to point to a shell script that starts SBT without colors, here's an example:
 
@@ -16,12 +18,14 @@ My SBT path is set like this:
 
 <pre><code>SBT_PATH = /Users/Mads/dev/tools/sbt/sbtnocolors</code></pre>
 
-Usage
-=====
+How to: Use
+===========
 
 Simply open a Textmate project and press ctrl+shift+1 and it will toggle the terminal. Now you can type in any SBT command and see the input in the console-view. 
 
 cmd+shift+1 will toggle focus between the document and the console.
+
+To start an interactive sbt session simply type <code>sbt</code> or <code>sbt shell</code>. Once started you can exit it at any time by typing quit (as you would in the terminal). If you just want to run a single command you can just type <code>sbt compile</code>etc. 
 
 The plugin adds a preference tab where you can change the colors used to display errors/warnings etc.
 

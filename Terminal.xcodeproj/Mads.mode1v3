@@ -272,8 +272,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>9</integer>
-									<integer>1</integer>
+									<integer>20</integer>
+									<integer>18</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -315,7 +315,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>NSWindow+Terminal.m</string>
+								<string>TerminalWindowController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -323,23 +323,23 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>NSWindow+Terminal.m</string>
+										<string>TerminalWindowController.m</string>
 										<key>_historyCapacity</key>
 										<integer>10</integer>
 										<key>bookmark</key>
-										<string>09DAD3591227F5E600A6D1D8</string>
+										<string>09050FF3122D42DB00B91F4D</string>
 										<key>history</key>
 										<array>
-											<string>09FDE4E01224576700F394B4</string>
 											<string>09FDE50812245B5F00F394B4</string>
 											<string>093B415112253C160095BA49</string>
-											<string>093B415212253C160095BA49</string>
-											<string>093B415312253C160095BA49</string>
-											<string>09DAD34B1227F5CB00A6D1D8</string>
 											<string>09DAD34C1227F5CB00A6D1D8</string>
-											<string>09DAD34E1227F5CB00A6D1D8</string>
 											<string>09DAD3571227F5E600A6D1D8</string>
-											<string>09DAD3581227F5E600A6D1D8</string>
+											<string>091BDD8A122CD64E006D3C95</string>
+											<string>091BDD8B122CD64E006D3C95</string>
+											<string>091BDD8C122CD64E006D3C95</string>
+											<string>091BDD8D122CD64E006D3C95</string>
+											<string>09050FC7122D1C1000B91F4D</string>
+											<string>09050FC8122D1C1000B91F4D</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -397,9 +397,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>09DAD3121227F37F00A6D1D8</string>
+				<string>09050F94122D07C300B91F4D</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>09DAD3131227F37F00A6D1D8</string>
+				<string>09050F95122D07C300B91F4D</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -537,7 +537,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>0998EAF811C1237100D5D4EF</string>
 		<string>/Users/Mads/dev/projects/textmate_console_plugin/Terminal.xcodeproj</string>
 	</array>
@@ -563,7 +562,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string></string>
+								<string>TerminalWindowController.h</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -580,6 +579,8 @@
 							<string>455pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -619,7 +620,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>0998EAF811C1237100D5D4EF</string>
-				<string>09DAD3141227F37F00A6D1D8</string>
+				<string>09050F8C122D07A900B91F4D</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

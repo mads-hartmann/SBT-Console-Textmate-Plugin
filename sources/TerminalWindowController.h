@@ -29,7 +29,7 @@
 		
 }
 
--	(void)runCommand:(NSString *)command;
+-	(void)runSBTCommand:(NSString *)command;
 -	(void)write:(NSString *)string;
 -	(void)focusInputField;
 -	(NSAttributedString*)createAttributedString:(NSString*)string;

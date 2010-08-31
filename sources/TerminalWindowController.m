@@ -62,7 +62,7 @@
 	[input setFont:font];
 	[output setFont:font];
 
-	[self write:@"> "];
+	[self write:@"\nWelcome. \nTo start an interactive SBT session type sbt shell. to run a single command type sbt <command> \n$ "];
 }
 
 -(void)readPipe: (NSNotification *)notification
@@ -83,7 +83,7 @@
 		[text release];
         [_fileHandleReading readInBackgroundAndNotify];
 	} else { // it's done
-		[self write:@"> "];
+		[self write:@"$ "];
 		[self analyze];
 	}
 }
@@ -97,8 +97,8 @@
 		[[output textStorage] replaceCharactersInRange:substringRange withAttributedString:aString];														
 	};
 	[text enumerateSubstringsInRange:range 
-													 options:NSStringEnumerationByLines 
-												usingBlock:myblock];
+							 options:NSStringEnumerationByLines 
+						  usingBlock:myblock];
 	lastAnalyzedRange = range;
 }
 
@@ -111,14 +111,16 @@
 - (IBAction)enter:(id)sender
 {
 	NSString *str = [NSString stringWithFormat:@"%@%@", [input stringValue], @"\n"];
-	[self write:str];
 	if( _task && [_task isRunning]) {
 		[_fileHandleWriting writeData:[str dataUsingEncoding:NSUTF8StringEncoding]];
 		[_fileHandleReading readInBackgroundAndNotify];
 	} else {
-		NSString *command = [input stringValue];
-		if ([command length] > 0)
-			[self runCommand:command];
+		if( [str rangeOfString:@"sbt"].location != NSNotFound ) {
+			[self write:str];
+			[self runSBTCommand:str];
+		} else {
+			[self write:[NSString stringWithFormat:@"Unkown command (try sbt shell or sbt compile) %@$ ", str]];
+		}
 	}
 	[self focusInputField];
 	[input setStringValue:@""];
@@ -138,6 +140,10 @@
 	
 	[[output textStorage] appendAttributedString:aString];
 	[self scrollToEndOfConsole];
+	if ([string rangeOfString:@"> "].location != NSNotFound  ) {
+		[self analyze];
+	}
+		
 }
 
 - (void)scrollToEndOfConsole {
@@ -249,7 +255,7 @@
 			([string rangeOfString:[NSString stringWithFormat:@"[warn] %@",projectDir]].location != NSNotFound));
 }
 
--(void)runCommand:(NSString *)command
+-(void)runSBTCommand:(NSString*)command
 {
 	[command retain];
 	
@@ -269,7 +275,10 @@
 	[_task setStandardOutput: pipe];
 	[_task setStandardError: pipe];
 	[_task setStandardInput: pipeInput];
-	NSArray *arguments = [NSArray arrayWithObjects: pathToSbt, command, nil];	
+	NSArray *splits = [command componentsSeparatedByString:@" "];
+	NSArray *commands = [splits subarrayWithRange:NSMakeRange(1, [splits count]-1)];
+	NSMutableArray *arguments = [NSMutableArray arrayWithObject:pathToSbt];
+	[arguments addObjectsFromArray:commands];
 	[_task setLaunchPath: @"/bin/sh"];
 	[_task setCurrentDirectoryPath:projectDir];
 	[_task setArguments:arguments];
