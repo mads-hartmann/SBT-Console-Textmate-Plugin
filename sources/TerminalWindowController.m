@@ -26,6 +26,34 @@
 											   object:nil];
 	lastAnalyzedRange = NSMakeRange(0, 0);
 	
+	
+	// defaults
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *defaultColors = [[NSMutableDictionary alloc] initWithCapacity:6];
+	
+	NSColor *normal		= [NSColor colorWithCalibratedWhite:0.000 alpha:1.000];
+	NSColor *error		= [NSColor colorWithCalibratedRed:0.786 green:0.724 blue:0.106 alpha:1.000];
+	NSColor *seperator	= [NSColor colorWithCalibratedRed:0.470 green:0.475 blue:0.488 alpha:1.000];
+	NSColor *success	= [NSColor colorWithCalibratedRed:0.000 green:0.650 blue:0.004 alpha:1.000];
+	NSColor *warning	= [NSColor colorWithCalibratedRed:0.517 green:0.120 blue:0.121 alpha:1.000];
+	NSColor *background = [NSColor colorWithCalibratedRed:0.964 green:0.965 blue:0.995 alpha:1.000];
+	
+	NSData *normalD		= [NSArchiver archivedDataWithRootObject:normal];
+	NSData *errorD		= [NSArchiver archivedDataWithRootObject:error];
+	NSData *seperatorD	= [NSArchiver archivedDataWithRootObject:seperator];
+	NSData *successD	= [NSArchiver archivedDataWithRootObject:success];
+	NSData *warningD	= [NSArchiver archivedDataWithRootObject:warning];
+	NSData *backgroundD = [NSArchiver archivedDataWithRootObject:background];
+
+	[defaultColors setObject:backgroundD forKey:@"backgroundColor"];
+	[defaultColors setObject:normalD forKey:@"normalColor"];
+	[defaultColors setObject:warningD forKey:@"warningColor"];
+	[defaultColors setObject:errorD forKey:@"errorColor"];
+	[defaultColors setObject:successD forKey:@"successColor"];
+	[defaultColors setObject:seperatorD forKey:@"seperatorColors"];
+		
+	[defaults registerDefaults:defaultColors];
+
 	return self;
 }
 
@@ -93,7 +121,8 @@
 	NSString *text = [[output textStorage] string];
 	NSRange range = NSMakeRange(0, [text length]);	
 	id myblock = ^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
-		NSAttributedString *aString = [self createAttributedString:substring];
+		[substring retain];
+		NSAttributedString *aString = [self createAttributedString:[substring autorelease]];
 		[[output textStorage] replaceCharactersInRange:substringRange withAttributedString:aString];														
 	};
 	[text enumerateSubstringsInRange:range 
@@ -139,6 +168,7 @@
 	
 	
 	[[output textStorage] appendAttributedString:aString];
+	[aString release];
 	[self scrollToEndOfConsole];
 	if ([string rangeOfString:@"> "].location != NSNotFound  ) {
 		[self analyze];
@@ -188,29 +218,37 @@
 	
 	NSColor * normalColor =nil;
 	NSData *normalData=[[NSUserDefaults standardUserDefaults] dataForKey:@"normalColor"];
-	if (normalData != nil)
+	if (normalData != nil){
 		normalColor =(NSColor *)[NSUnarchiver unarchiveObjectWithData:normalData];
-	
+	}
+
+	// warning
 	NSColor * warningColor =nil;
 	NSData *warningData=[[NSUserDefaults standardUserDefaults] dataForKey:@"warningColor"];
-	if (warningData != nil)
+	if (warningData != nil) {
 		warningColor =(NSColor *)[NSUnarchiver unarchiveObjectWithData:warningData];
-	
+	} 
+
+	// error
 	NSColor * errorColor =nil;
 	NSData *errorData=[[NSUserDefaults standardUserDefaults] dataForKey:@"errorColor"];
-	if (errorData != nil)
+	if (errorData != nil) {
 		errorColor =(NSColor *)[NSUnarchiver unarchiveObjectWithData:errorData];
+	} 
 		
+	// success
 	NSColor * successColor =nil;
 	NSData *successData=[[NSUserDefaults standardUserDefaults] dataForKey:@"successColor"];
-	if (successData != nil)
+	if (successData != nil) {
 		successColor =(NSColor *)[NSUnarchiver unarchiveObjectWithData:successData];
-	
+	} 
+
+	// seperate color
 	NSColor * seperatorColor =nil;
 	NSData *seperatorData=[[NSUserDefaults standardUserDefaults] dataForKey:@"seperatorColor"];
-	if (seperatorData != nil)
+	if (seperatorData != nil) {
 		seperatorColor =(NSColor *)[NSUnarchiver unarchiveObjectWithData:seperatorData];
-
+	} 
 	
 	// adding the color attribute
 	if ([string rangeOfString:@"[error]"].location != NSNotFound) {
