@@ -29,7 +29,7 @@
 	
 	// defaults
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *defaultColors = [[NSMutableDictionary alloc] initWithCapacity:6];
+    NSMutableDictionary *defaultOptions = [[NSMutableDictionary alloc] initWithCapacity:6];
 	
 	NSColor *normal		= [NSColor colorWithCalibratedWhite:0.000 alpha:1.000];
 	NSColor *error		= [NSColor colorWithCalibratedRed:0.786 green:0.724 blue:0.106 alpha:1.000];
@@ -45,14 +45,15 @@
 	NSData *warningD	= [NSArchiver archivedDataWithRootObject:warning];
 	NSData *backgroundD = [NSArchiver archivedDataWithRootObject:background];
 
-	[defaultColors setObject:backgroundD forKey:@"backgroundColor"];
-	[defaultColors setObject:normalD forKey:@"normalColor"];
-	[defaultColors setObject:warningD forKey:@"warningColor"];
-	[defaultColors setObject:errorD forKey:@"errorColor"];
-	[defaultColors setObject:successD forKey:@"successColor"];
-	[defaultColors setObject:seperatorD forKey:@"seperatorColors"];
+	[defaultOptions setObject:backgroundD forKey:@"backgroundColor"];
+	[defaultOptions setObject:normalD forKey:@"normalColor"];
+	[defaultOptions setObject:warningD forKey:@"warningColor"];
+	[defaultOptions setObject:errorD forKey:@"errorColor"];
+	[defaultOptions setObject:successD forKey:@"successColor"];
+	[defaultOptions setObject:seperatorD forKey:@"seperatorColors"];
+	[defaultOptions setObject:[NSNumber numberWithBool:YES] forKey:@"displayScrollbarConsole"];
 		
-	[defaults registerDefaults:defaultColors];
+	[defaults registerDefaults:defaultOptions];
 
 	return self;
 }
@@ -82,6 +83,10 @@
 		   toObject: [NSUserDefaultsController sharedUserDefaultsController]
 		withKeyPath:@"values.backgroundColor"
 			options:bindingOptions];
+	[outputContainer bind:@"hasVerticalScroller"
+				 toObject:[NSUserDefaultsController sharedUserDefaultsController] 
+			  withKeyPath:@"values.displayScrollbarConsole" 
+				  options:bindingOptions];
 	
 	// set the font
 	NSString *fontName = [[NSUserDefaults standardUserDefaults] stringForKey:@"OakTextViewNormalFontName"];
