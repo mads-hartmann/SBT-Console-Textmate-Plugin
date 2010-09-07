@@ -44,6 +44,7 @@
 	NSData *successD	= [NSArchiver archivedDataWithRootObject:success];
 	NSData *warningD	= [NSArchiver archivedDataWithRootObject:warning];
 	NSData *backgroundD = [NSArchiver archivedDataWithRootObject:background];
+	NSData *displayD	= [NSArchiver archivedDataWithRootObject:[NSNumber numberWithBool:YES]];
 
 	[defaultOptions setObject:backgroundD forKey:@"backgroundColor"];
 	[defaultOptions setObject:normalD forKey:@"normalColor"];
@@ -51,7 +52,7 @@
 	[defaultOptions setObject:errorD forKey:@"errorColor"];
 	[defaultOptions setObject:successD forKey:@"successColor"];
 	[defaultOptions setObject:seperatorD forKey:@"seperatorColors"];
-	[defaultOptions setObject:[NSNumber numberWithBool:YES] forKey:@"displayScrollbarConsole"];
+	[defaultOptions setObject:displayD forKey:@"displayScrollbarConsole"];
 		
 	[defaults registerDefaults:defaultOptions];
 
@@ -67,22 +68,26 @@
 	NSMutableDictionary *bindingOptions = [NSMutableDictionary dictionary];
 	[bindingOptions setObject:NSUnarchiveFromDataTransformerName
 					   forKey:@"NSValueTransformerName"];
+	
+
 
 	// set the colors
 	
-	[input bind: @"backgroundColor"
-		   toObject: [NSUserDefaultsController sharedUserDefaultsController]
-		withKeyPath:@"values.backgroundColor"
-			options:bindingOptions];
-	[input bind: @"textColor"
-	   toObject: [NSUserDefaultsController sharedUserDefaultsController]
+	[input bind:@"backgroundColor"
+	   toObject:[NSUserDefaultsController sharedUserDefaultsController]
+	withKeyPath:@"values.backgroundColor"
+		options:bindingOptions];
+	
+	[input bind:@"textColor"
+	   toObject:[NSUserDefaultsController sharedUserDefaultsController]
 	withKeyPath:@"values.normalColor"
 		options:bindingOptions];
 
-	[outputContainer bind: @"backgroundColor"
-		   toObject: [NSUserDefaultsController sharedUserDefaultsController]
-		withKeyPath:@"values.backgroundColor"
-			options:bindingOptions];
+	[outputContainer bind:@"backgroundColor"
+				 toObject:[NSUserDefaultsController sharedUserDefaultsController]
+			  withKeyPath:@"values.backgroundColor"
+				  options:bindingOptions];
+	
 	[outputContainer bind:@"hasVerticalScroller"
 				 toObject:[NSUserDefaultsController sharedUserDefaultsController] 
 			  withKeyPath:@"values.displayScrollbarConsole" 

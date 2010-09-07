@@ -21,7 +21,6 @@
 {
 	[self T_becomeMainWindow];
 	NSWindowController* controller = [self windowController];
-	[[Terminal instance] setLastWindowController:controller];
 	if ([controller isKindOfClass:OakProjectController]) {
 		[[[[[NSApp mainMenu] itemWithTitle:@"View"] submenu] itemWithTitle:@"Terminal"] setHidden:NO];
 		[[Terminal instance] setLastWindowController:controller];
@@ -29,6 +28,13 @@
 	} else if ([controller isKindOfClass:OakDocumentController]){
 		[[[[[NSApp mainMenu] itemWithTitle:@"View"] submenu] itemWithTitle:@"Terminal"] setHidden:YES];
 	}
+	[[Terminal instance] setLastWindowController:controller];
+}
+
+- (void)T_close 
+{
+	[[Terminal instance] setLastWindowController:nil];
+	[self T_close];
 }
 
 @end

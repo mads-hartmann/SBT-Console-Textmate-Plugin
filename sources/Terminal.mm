@@ -38,15 +38,17 @@ static Terminal *sharedInstance = nil;
 		
 		iVars = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
 		
+		// Something here breaks mate -w filename
 		[OakWindow jr_swizzleMethod:@selector(becomeMainWindow) withMethod:@selector(T_becomeMainWindow) error:NULL];
+		[OakWindow jr_swizzleMethod:@selector(close) withMethod:@selector(T_close) error:NULL];
 		[OakProjectController jr_swizzleMethod:@selector(windowDidLoad) withMethod:@selector(T_windowDidLoad) error:NULL];		
 		[OakDocumentController jr_swizzleMethod:@selector(windowDidLoad) withMethod:@selector(T_windowDidLoad) error:NULL];		
 	}
 	sharedInstance = self;
 	
-	//image
-	NSString* iconPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"textmate-minimap" ofType:@"tiff"];
-    iconImage = [[NSImage alloc] initByReferencingFile:iconPath];
+	//image - Don't have a proper image to use just yet.
+	//	NSString* iconPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"textmate-minimap" ofType:@"tiff"];
+	//  iconImage = [[NSImage alloc] initByReferencingFile:iconPath];
 	
 	//preference
 	NSString* nibPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"Preferences" ofType:@"nib"];
@@ -63,7 +65,6 @@ static Terminal *sharedInstance = nil;
     [OakPreferencesManager jr_swizzleMethod:@selector(toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar:) 
                                  withMethod:@selector(Console_toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar:) error:NULL];
     [OakPreferencesManager jr_swizzleMethod:@selector(selectToolbarItem:) withMethod:@selector(Console_selectToolbarItem:) error:NULL];
-	
 	
 	return self;
 }
@@ -86,6 +87,8 @@ static Terminal *sharedInstance = nil;
 {
 	[self uninstallMenuItem];
 	[lastWindowController release];
+	[lastTerminalWindowController release];
+	[prefWindowController release];
 	[iVars release];
 	[sharedInstance release];
 	sharedInstance = nil;
