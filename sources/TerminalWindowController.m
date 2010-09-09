@@ -8,6 +8,7 @@
 
 #import "TerminalWindowController.h"
 #import "Terminal.h"
+#import "MAHJSplitView.h"
 
 @interface TerminalWindowController (private)
 - (bool)mayContainPath:(NSString *)string;
@@ -26,36 +27,6 @@
 											   object:nil];
 	lastAnalyzedRange = NSMakeRange(0, 0);
 	
-	
-	// defaults
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *defaultOptions = [[NSMutableDictionary alloc] initWithCapacity:6];
-	
-	NSColor *normal		= [NSColor colorWithCalibratedWhite:0.000 alpha:1.000];
-	NSColor *error		= [NSColor colorWithCalibratedRed:0.786 green:0.724 blue:0.106 alpha:1.000];
-	NSColor *seperator	= [NSColor colorWithCalibratedRed:0.470 green:0.475 blue:0.488 alpha:1.000];
-	NSColor *success	= [NSColor colorWithCalibratedRed:0.000 green:0.650 blue:0.004 alpha:1.000];
-	NSColor *warning	= [NSColor colorWithCalibratedRed:0.517 green:0.120 blue:0.121 alpha:1.000];
-	NSColor *background = [NSColor colorWithCalibratedRed:0.964 green:0.965 blue:0.995 alpha:1.000];
-	
-	NSData *normalD		= [NSArchiver archivedDataWithRootObject:normal];
-	NSData *errorD		= [NSArchiver archivedDataWithRootObject:error];
-	NSData *seperatorD	= [NSArchiver archivedDataWithRootObject:seperator];
-	NSData *successD	= [NSArchiver archivedDataWithRootObject:success];
-	NSData *warningD	= [NSArchiver archivedDataWithRootObject:warning];
-	NSData *backgroundD = [NSArchiver archivedDataWithRootObject:background];
-	NSData *displayD	= [NSArchiver archivedDataWithRootObject:[NSNumber numberWithBool:YES]];
-
-	[defaultOptions setObject:backgroundD forKey:@"backgroundColor"];
-	[defaultOptions setObject:normalD forKey:@"normalColor"];
-	[defaultOptions setObject:warningD forKey:@"warningColor"];
-	[defaultOptions setObject:errorD forKey:@"errorColor"];
-	[defaultOptions setObject:successD forKey:@"successColor"];
-	[defaultOptions setObject:seperatorD forKey:@"seperatorColors"];
-	[defaultOptions setObject:displayD forKey:@"displayScrollbarConsole"];
-		
-	[defaults registerDefaults:defaultOptions];
-
 	return self;
 }
 
@@ -69,8 +40,6 @@
 	[bindingOptions setObject:NSUnarchiveFromDataTransformerName
 					   forKey:@"NSValueTransformerName"];
 	
-
-
 	// set the colors
 	
 	[input bind:@"backgroundColor"
@@ -335,6 +304,7 @@
 	[command release];
 }
 
+
 -	(IBAction)clearTerminal:(id)sender
 {
 	[output setString:@""];
@@ -346,5 +316,51 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];	
 	[super dealloc];
 }
+
+#pragma mark SplitView Delegate
+
+
+- (void)splitView:(id)sender resizeSubviewsWithOldSize:(NSSize)oldSize
+{
+	if(![sender isKindOfClass:[MAHJSplitView class]])
+		return;
+	
+	
+	NSData *verticalData = [[NSUserDefaults standardUserDefaults] dataForKey:@"displayConsoleVertical"];
+	NSNumber *vertical = (NSNumber*) [NSUnarchiver unarchiveObjectWithData:verticalData];
+	
+	if ([vertical intValue] == 1) {
+		
+		float newHeight = [sender frame].size.height;
+		float newWidth  = [sender frame].size.width - [[sender drawerView] frame].size.width - [sender dividerThickness];
+		
+		NSRect newFrame = [[sender drawerView] frame];
+		newFrame.size.height = newHeight;
+		[[sender drawerView] setFrame:newFrame];
+		
+		newFrame = [[sender documentView] frame];
+		newFrame.size.width = newWidth;
+		newFrame.size.height = newHeight;
+		[[sender documentView] setFrame:newFrame];
+		
+	} else {
+		
+		float newHeight = [sender frame].size.height  - [[sender drawerView] frame].size.height - [sender dividerThickness];
+		float newWidth  = [sender frame].size.width;
+		
+		NSRect newFrame = [[sender drawerView] frame];
+		newFrame.size.width = newWidth;
+		[[sender drawerView] setFrame:newFrame];
+		
+		newFrame = [[sender documentView] frame];
+		newFrame.size.width = newWidth;
+		newFrame.size.height = newHeight;
+		[[sender documentView] setFrame:newFrame];
+		
+	}
+	
+	[sender adjustSubviews];
+}
+
 
 @end

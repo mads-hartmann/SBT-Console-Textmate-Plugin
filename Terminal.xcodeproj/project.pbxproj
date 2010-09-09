@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0927EBC71238EB48006CE39D /* MAHJSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0927EBC61238EB48006CE39D /* MAHJSplitView.m */; };
 		09FDE4A012244AD000F394B4 /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FDE49412244AD000F394B4 /* JRSwizzle.m */; };
 		09FDE4A112244AD000F394B4 /* KFSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FDE49612244AD000F394B4 /* KFSplitView.m */; };
 		09FDE4A212244AD000F394B4 /* NSWindow+Terminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FDE49812244AD000F394B4 /* NSWindow+Terminal.m */; };
@@ -24,6 +25,8 @@
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		0927EBC51238EB48006CE39D /* MAHJSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAHJSplitView.h; sourceTree = "<group>"; };
+		0927EBC61238EB48006CE39D /* MAHJSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAHJSplitView.m; sourceTree = "<group>"; };
 		092CF48411F8957600382E61 /* Clock_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clock_Prefix.pch; sourceTree = "<group>"; };
 		09FDE49312244AD000F394B4 /* JRSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSwizzle.h; sourceTree = "<group>"; };
 		09FDE49412244AD000F394B4 /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSwizzle.m; sourceTree = "<group>"; };
@@ -92,15 +95,25 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		0927EBC31238EB2E006CE39D /* sidepane */ = {
+			isa = PBXGroup;
+			children = (
+				09FDE49512244AD000F394B4 /* KFSplitView.h */,
+				09FDE49612244AD000F394B4 /* KFSplitView.m */,
+				0927EBC51238EB48006CE39D /* MAHJSplitView.h */,
+				0927EBC61238EB48006CE39D /* MAHJSplitView.m */,
+			);
+			name = sidepane;
+			sourceTree = "<group>";
+		};
 		09FDE49212244AD000F394B4 /* sources */ = {
 			isa = PBXGroup;
 			children = (
+				0927EBC31238EB2E006CE39D /* sidepane */,
 				09FDE4A812244CED00F394B4 /* NSWindowController+Preferences.h */,
 				09FDE4A912244CED00F394B4 /* NSWindowController+Preferences.m */,
 				09FDE49312244AD000F394B4 /* JRSwizzle.h */,
 				09FDE49412244AD000F394B4 /* JRSwizzle.m */,
-				09FDE49512244AD000F394B4 /* KFSplitView.h */,
-				09FDE49612244AD000F394B4 /* KFSplitView.m */,
 				09FDE49712244AD000F394B4 /* NSWindow+Terminal.h */,
 				09FDE49812244AD000F394B4 /* NSWindow+Terminal.m */,
 				09FDE49912244AD000F394B4 /* NSWindowController+Terminal.h */,
@@ -228,6 +241,7 @@
 				09FDE4A412244AD000F394B4 /* Terminal.mm in Sources */,
 				09FDE4A512244AD000F394B4 /* TerminalWindowController.m in Sources */,
 				09FDE4AA12244CED00F394B4 /* NSWindowController+Preferences.m in Sources */,
+				0927EBC71238EB48006CE39D /* MAHJSplitView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

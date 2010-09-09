@@ -7,16 +7,19 @@
 //
 
 #import <Cocoa/Cocoa.h>
-@class KFSplitView;
+@class MAHJSplitView;
 @class TerminalWindowController;
 
 @interface NSWindowController (NSWindowControllerTerminal) 
 
--	(KFSplitView*)getSplitView;
+-	(MAHJSplitView*)getSplitView;
 -	(void)toggleTerminal;
 -	(void)toggleTerminalFocus;
 -	(void)T_windowDidLoad;
 -	(TerminalWindowController *)terminalController;
 
+- (MAHJSplitView *)addConsoleProjectPlus:(NSView *)documentView terminalView:(NSView *)terminalView;
+- (MAHJSplitView *)addConsoleMissingDrawer:(NSView *)documentView terminalView:(NSView *)terminalView;
+- (MAHJSplitView *)addConsoleVanillaTextMate:(NSView *)documentView terminalView:(NSView *)terminalView;
 
 @end

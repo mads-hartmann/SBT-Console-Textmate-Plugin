@@ -39,6 +39,8 @@
 -	(IBAction)clearTerminal:(id)sender;
 -	(IBAction)enter:(id)sender;
 
+- (void)splitView:(id)sender resizeSubviewsWithOldSize:(NSSize)oldSize;
+
 @property (retain) NSString *projectDir;
 @property (retain) NSString *pathToSbt;
 @property (assign) IBOutlet NSScrollView *outputContainer;

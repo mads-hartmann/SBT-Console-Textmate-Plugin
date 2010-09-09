@@ -46,6 +46,38 @@ static Terminal *sharedInstance = nil;
 	}
 	sharedInstance = self;
 	
+	// defaults
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *defaultOptions = [[NSMutableDictionary alloc] initWithCapacity:6];
+	
+	NSColor *normal		= [NSColor colorWithCalibratedWhite:0.000 alpha:1.000];
+	NSColor *error		= [NSColor colorWithCalibratedRed:0.786 green:0.724 blue:0.106 alpha:1.000];
+	NSColor *seperator	= [NSColor colorWithCalibratedRed:0.470 green:0.475 blue:0.488 alpha:1.000];
+	NSColor *success	= [NSColor colorWithCalibratedRed:0.000 green:0.650 blue:0.004 alpha:1.000];
+	NSColor *warning	= [NSColor colorWithCalibratedRed:0.517 green:0.120 blue:0.121 alpha:1.000];
+	NSColor *background = [NSColor colorWithCalibratedRed:0.964 green:0.965 blue:0.995 alpha:1.000];
+	
+	NSData *normalD		= [NSArchiver archivedDataWithRootObject:normal];
+	NSData *errorD		= [NSArchiver archivedDataWithRootObject:error];
+	NSData *seperatorD	= [NSArchiver archivedDataWithRootObject:seperator];
+	NSData *successD	= [NSArchiver archivedDataWithRootObject:success];
+	NSData *warningD	= [NSArchiver archivedDataWithRootObject:warning];
+	NSData *backgroundD = [NSArchiver archivedDataWithRootObject:background];
+	NSData *displayD	= [NSArchiver archivedDataWithRootObject:[NSNumber numberWithBool:YES]];
+	NSData *horizontalD	= [NSArchiver archivedDataWithRootObject:[NSNumber numberWithBool:YES]];
+	
+	[defaultOptions setObject:backgroundD forKey:@"backgroundColor"];
+	[defaultOptions setObject:normalD forKey:@"normalColor"];
+	[defaultOptions setObject:warningD forKey:@"warningColor"];
+	[defaultOptions setObject:errorD forKey:@"errorColor"];
+	[defaultOptions setObject:successD forKey:@"successColor"];
+	[defaultOptions setObject:seperatorD forKey:@"seperatorColors"];
+	[defaultOptions setObject:displayD forKey:@"displayScrollbarConsole"];
+	[defaultOptions setObject:horizontalD forKey:@"displayConsoleVertical"];
+	
+	[defaults registerDefaults:defaultOptions];
+	
+	
 	//image - Don't have a proper image to use just yet.
 	//	NSString* iconPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"textmate-minimap" ofType:@"tiff"];
 	//  iconImage = [[NSImage alloc] initByReferencingFile:iconPath];

@@ -10,7 +10,7 @@
 #import "TerminalWindowController.h"
 #import "Terminal.h"
 #import "TextMate.h"
-#import "KFSplitView.h"
+#import "MAHJSplitView.h"
 
 // stuff that the textmate-windowcontrollers (OakProjectController, OakDocumentControler) implement
 @interface NSWindowController (TextMate_WindowControllers_Only)
@@ -33,10 +33,10 @@
 
 @implementation NSWindowController (NSWindowControllerTerminal)
 
-- (KFSplitView*)getSplitView
+- (MAHJSplitView*)getSplitView
 {
 	NSMutableDictionary* ivars = [[Terminal instance] getIVarsFor:self];
-	return (KFSplitView*)[ivars objectForKey:@"splitView"];
+	return (MAHJSplitView*)[ivars objectForKey:@"splitView"];
 }
 
 - (TerminalWindowController *)terminalController
@@ -48,7 +48,7 @@
 - (void)toggleTerminalFocus
 {
 	NSMutableDictionary* ivars = [[Terminal instance] getIVarsFor:self];
-	KFSplitView *splitView = [ivars objectForKey:@"splitView"];
+	MAHJSplitView *splitView = [ivars objectForKey:@"splitView"];
 	if ( splitView == nil) { // closed
 		[self toggleTerminal];
 	}
@@ -63,7 +63,7 @@
 - (void)toggleTerminal
 {
 	NSMutableDictionary* ivars = [[Terminal instance] getIVarsFor:self];
-	KFSplitView *splitView = [ivars objectForKey:@"splitView"];
+	MAHJSplitView *splitView = [ivars objectForKey:@"splitView"];
 	// Creat the drawer if it doesn't exist.
 	if (splitView == nil){
 		// Create the content for the drawer. (hacky, but it needs an owner)
@@ -80,64 +80,37 @@
 		[terminalView retain];
 		NSView* documentView = [[[self window] contentView] retain];
 		
-		// check whether projectplus or missingdrawer is present
-		// if so, put our splitview into their splitview, not to confuse their implementation
-		// (which sadly does [window contentView] to find it's own splitView)
 		if (NSClassFromString(@"CWTMSplitView") != nil
 			&& [[NSUserDefaults standardUserDefaults] boolForKey:@"ProjectPlus Sidebar Enabled"]
 			&& [self isKindOfClass:OakProjectController]) {
-			
-			NSView* preExistingSplitView = documentView;
-			BOOL ppSidebarIsOnRight = [[NSUserDefaults standardUserDefaults] boolForKey:@"ProjectPlus Sidebar on Right"];
-			
-			NSView* realDocumentView;
-			NSView* originalSidePane;
-			if (ppSidebarIsOnRight) {
-				realDocumentView = [[preExistingSplitView subviews] objectAtIndex:0];
-				originalSidePane = [[preExistingSplitView subviews] objectAtIndex:1];
-			}
-			else {
-				realDocumentView = [[preExistingSplitView subviews] objectAtIndex:1];
-				originalSidePane = [[preExistingSplitView subviews] objectAtIndex:0];
-			}
-			
-			[originalSidePane retain];
-			[realDocumentView retain];
-			[realDocumentView removeFromSuperview];
-			splitView = [[KFSplitView alloc] initWithFrame:[realDocumentView frame]];
-			[splitView setVertical:NO];
-			
-			[splitView addSubview:realDocumentView];
-			[splitView addSubview:terminalView];
-			
-			if (ppSidebarIsOnRight)
-				[preExistingSplitView addSubview:splitView];
-			[preExistingSplitView addSubview:originalSidePane];
-			if (!ppSidebarIsOnRight)
-				[preExistingSplitView addSubview:splitView]; 
-    			
-			[realDocumentView release];
-			[originalSidePane release];
-		} else { // no relevant plugins present, init in contentView of Window
-			[[self window] setContentView:nil];
-			splitView = [[KFSplitView alloc] initWithFrame:[documentView frame]];
-			[splitView setVertical:NO];
-			[splitView addSubview:documentView];
-			[splitView addSubview:terminalView];			
-			[[self window] setContentView:splitView];
+			splitView = [self addConsoleProjectPlus:documentView terminalView:terminalView];
+		} else if (NSClassFromString(@"MDSplitView") != nil) {
+			splitView = [self addConsoleMissingDrawer:documentView terminalView:terminalView];
+		} else { 
+			splitView = [self addConsoleVanillaTextMate:documentView terminalView:terminalView];	
 		}
+
 		[terminalView release];
+		
+		NSMutableDictionary *bindingOptions = [NSMutableDictionary dictionary];
+		[bindingOptions setObject:NSUnarchiveFromDataTransformerName
+						   forKey:@"NSValueTransformerName"];
+		[splitView bind:@"vertical"
+					 toObject:[NSUserDefaultsController sharedUserDefaultsController] 
+				  withKeyPath:@"values.displayConsoleVertical" 
+					  options:bindingOptions];
+		
 		[splitView setDividerStyle:NSSplitViewDividerStyleThin];
-		[[[splitView subviews] objectAtIndex:1] setFrameSize:NSMakeSize([[self window] frame].size.width , 200)];
+		[splitView setDelegate:[[Terminal instance] lastTerminalWindowController]];
 		[ivars setObject:splitView forKey:@"splitView"];
 		[splitView release];
 		[documentView release];
 		[[[Terminal instance] lastTerminalWindowController] focusInputField];
 	} else {
+				
 		BOOL isCollapsed = [splitView isSubviewCollapsed:[[splitView subviews] objectAtIndex:1]];
 		if (isCollapsed) {
 			[splitView setSubview:[[splitView subviews] objectAtIndex:1] isCollapsed:0];
-			[[[splitView subviews] objectAtIndex:1] setFrameSize:NSMakeSize([[self window] frame].size.width , 200)];
 			[[[Terminal instance] lastTerminalWindowController] focusInputField];
 		} else {
 			[splitView setSubview:[[splitView subviews] objectAtIndex:1] isCollapsed:1];
@@ -148,6 +121,83 @@
 	}
 }
 
+/** 
+ *	Adds a console in the appropriate place. This expects the TextMate instance to run with
+ *	the plugin Project Plus installed
+ */
+- (MAHJSplitView *)addConsoleProjectPlus:(NSView *)documentView terminalView:(NSView *)terminalView
+{
+	NSView* preExistingSplitView = documentView;
+	BOOL ppSidebarIsOnRight = [[NSUserDefaults standardUserDefaults] boolForKey:@"ProjectPlus Sidebar on Right"];
+	
+	NSView* realDocumentView;
+	NSView* originalSidePane;
+	if (ppSidebarIsOnRight) {
+		realDocumentView = [[preExistingSplitView subviews] objectAtIndex:0];
+		originalSidePane = [[preExistingSplitView subviews] objectAtIndex:1];
+	}
+	else {
+		realDocumentView = [[preExistingSplitView subviews] objectAtIndex:1];
+		originalSidePane = [[preExistingSplitView subviews] objectAtIndex:0];
+	}
+	
+	[originalSidePane retain];
+	[realDocumentView retain];
+	[realDocumentView removeFromSuperview];
+	MAHJSplitView *splitView = [[MAHJSplitView alloc] initWithFrame:[realDocumentView frame]];
+	
+	[splitView addSubview:realDocumentView];
+	[splitView addSubview:terminalView];
+	
+	if (ppSidebarIsOnRight)
+		[preExistingSplitView addSubview:splitView];
+	[preExistingSplitView addSubview:originalSidePane];
+	if (!ppSidebarIsOnRight)
+		[preExistingSplitView addSubview:splitView]; 
+	
+	[realDocumentView release];
+	[originalSidePane release];
+	return [splitView autorelease];
+}
+
+/** 
+ *	Adds a console in the appropriate place. This expects the TextMate instance to run with
+ *	the plugin MissingDrawer installed
+ */
+- (MAHJSplitView *)addConsoleMissingDrawer:(NSView *)documentView terminalView:(NSView *)terminalView
+{
+	NSView* preExistingSplitView = documentView;
+	NSView* realDocumentView = [[preExistingSplitView subviews] objectAtIndex:1];
+	NSView* originalSidePane = [[preExistingSplitView subviews] objectAtIndex:0];
+	[originalSidePane retain];
+	[realDocumentView retain];
+	[realDocumentView removeFromSuperview];
+	MAHJSplitView *splitView = [[MAHJSplitView alloc] initWithFrame:[realDocumentView frame]];
+	
+	[splitView addSubview:realDocumentView];
+	[splitView addSubview:terminalView];
+	
+	[preExistingSplitView addSubview:originalSidePane];
+	[preExistingSplitView addSubview:splitView];
+	
+	[realDocumentView release];
+	[originalSidePane release];
+	return [splitView autorelease];
+}
+
+/** 
+ *	Adds a console in the appropriate place. This expects the TextMate instance to run without
+ *	any plugins
+ */
+- (MAHJSplitView *)addConsoleVanillaTextMate:(NSView *)documentView terminalView:(NSView *)terminalView
+{
+	[[self window] setContentView:nil];
+	MAHJSplitView *splitView = [[MAHJSplitView alloc] initWithFrame:[documentView frame]];
+	[splitView addSubview:documentView];
+	[splitView addSubview:terminalView];			
+	[[self window] setContentView:splitView];
+	return [splitView autorelease];
+}
 
 
 - (void)T_windowDidLoad
