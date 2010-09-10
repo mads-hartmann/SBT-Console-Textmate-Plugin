@@ -79,8 +79,8 @@ static Terminal *sharedInstance = nil;
 	
 	
 	//image - Don't have a proper image to use just yet.
-	//	NSString* iconPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"textmate-minimap" ofType:@"tiff"];
-	//  iconImage = [[NSImage alloc] initByReferencingFile:iconPath];
+	NSString* iconPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"icon" ofType:@"png"];
+	iconImage = [[NSImage alloc] initByReferencingFile:iconPath];
 	
 	//preference
 	NSString* nibPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"Preferences" ofType:@"nib"];

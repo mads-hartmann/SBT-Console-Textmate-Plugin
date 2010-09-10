@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0927EBC71238EB48006CE39D /* MAHJSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0927EBC61238EB48006CE39D /* MAHJSplitView.m */; };
+		093ED608123A12C900D75E0E /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 093ED607123A12C900D75E0E /* icon.png */; };
 		09FDE4A012244AD000F394B4 /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FDE49412244AD000F394B4 /* JRSwizzle.m */; };
 		09FDE4A112244AD000F394B4 /* KFSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FDE49612244AD000F394B4 /* KFSplitView.m */; };
 		09FDE4A212244AD000F394B4 /* NSWindow+Terminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FDE49812244AD000F394B4 /* NSWindow+Terminal.m */; };
@@ -28,6 +29,7 @@
 		0927EBC51238EB48006CE39D /* MAHJSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAHJSplitView.h; sourceTree = "<group>"; };
 		0927EBC61238EB48006CE39D /* MAHJSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAHJSplitView.m; sourceTree = "<group>"; };
 		092CF48411F8957600382E61 /* Clock_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clock_Prefix.pch; sourceTree = "<group>"; };
+		093ED607123A12C900D75E0E /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		09FDE49312244AD000F394B4 /* JRSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSwizzle.h; sourceTree = "<group>"; };
 		09FDE49412244AD000F394B4 /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSwizzle.m; sourceTree = "<group>"; };
 		09FDE49512244AD000F394B4 /* KFSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFSplitView.h; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				093ED607123A12C900D75E0E /* icon.png */,
 				09FDE4B712244EBD00F394B4 /* Preferences.xib */,
 				17B8A10C0913378100E243E7 /* Terminal.nib */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
@@ -208,6 +211,7 @@
 				8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */,
 				17B8A10E0913378100E243E7 /* Terminal.nib in Resources */,
 				09FDE4B912244EBD00F394B4 /* Preferences.xib in Resources */,
+				093ED608123A12C900D75E0E /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

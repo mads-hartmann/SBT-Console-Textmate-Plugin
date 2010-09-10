@@ -286,7 +286,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>18</integer>
+									<integer>16</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -329,7 +329,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>TerminalWindowController.m</string>
+								<string>Terminal.mm</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -337,11 +337,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>TerminalWindowController.m</string>
+										<string>Terminal.mm</string>
 										<key>_historyCapacity</key>
 										<integer>10</integer>
 										<key>bookmark</key>
-										<string>09A583B31239729300011838</string>
+										<string>093ED5F0123A070C00D75E0E</string>
 										<key>history</key>
 										<array>
 											<string>0927ED81123905E8006CE39D</string>
@@ -352,8 +352,8 @@
 											<string>0927EE32123913F3006CE39D</string>
 											<string>0927EE33123913F3006CE39D</string>
 											<string>0927EE3B12391408006CE39D</string>
-											<string>0927EE47123914CD006CE39D</string>
-											<string>0927EEDB12392C5A006CE39D</string>
+											<string>093ED5E5123A062D00D75E0E</string>
+											<string>093ED5E6123A062D00D75E0E</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -411,9 +411,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>09A58389123938FE00011838</string>
+				<string>093ED5E8123A062D00D75E0E</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>09A5838A123938FE00011838</string>
+				<string>093ED5E9123A062D00D75E0E</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -632,7 +632,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>0998EAF811C1237100D5D4EF</string>
-				<string>09A5838B123938FE00011838</string>
+				<string>093ED5EA123A062E00D75E0E</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
