@@ -1,3 +1,7 @@
 Terminal.xcodeproj/Mads.mode1v3
 Terminal.xcodeproj/Mads.pbxuser
 build/
+.DS_Store
+English.lproj/.DS_Store
+English.lproj/.svn/
+resources/.DS_Store
