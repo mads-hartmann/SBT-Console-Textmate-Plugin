@@ -154,6 +154,12 @@ static Terminal *sharedInstance = nil;
 		[toggleTerminalfocus setKeyEquivalentModifierMask:NSShiftKeyMask|NSCommandKeyMask];
 		[toggleTerminalfocus setTarget:self];
 		
+		NSMenuItem* clearTerminalMenuItem = [[NSMenuItem alloc] initWithTitle:@"Clear Terminal" 
+														  action:@selector(clearTerminal:) keyEquivalent:@""];
+		[clearTerminalMenuItem setKeyEquivalent:@"k"];
+		[clearTerminalMenuItem setKeyEquivalentModifierMask:NSCommandKeyMask];
+		[clearTerminalMenuItem setTarget:self];
+		
 		terminalItem = [[NSMenuItem alloc] initWithTitle:@"Terminal" action:NULL keyEquivalent:@""];
 		[terminalItem setHidden:YES];
 		
@@ -161,11 +167,17 @@ static Terminal *sharedInstance = nil;
 		terminalMenu = [[NSMenu alloc] initWithTitle:@"Terminal"];
 		[terminalMenu insertItem:showTerminalMenuItem atIndex:0];
 		[terminalMenu insertItem:toggleTerminalfocus atIndex:0];
+		[terminalMenu insertItem:clearTerminalMenuItem atIndex:0];
 		
 		// add the menu
 		[windowMenu insertItem:terminalItem atIndex:index];
 		[windowMenu setSubmenu:terminalMenu forItem:terminalItem];
 	}
+}
+
+- (void)clearTerminal:(id)sender 
+{
+	[lastTerminalWindowController clearTerminal:self];
 }
 
 - (void)toggleTerminal:(id)sender
