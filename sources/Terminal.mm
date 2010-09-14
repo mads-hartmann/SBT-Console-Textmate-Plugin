@@ -157,7 +157,7 @@ static Terminal *sharedInstance = nil;
 		NSMenuItem* clearTerminalMenuItem = [[NSMenuItem alloc] initWithTitle:@"Clear Terminal" 
 														  action:@selector(clearTerminal:) keyEquivalent:@""];
 		[clearTerminalMenuItem setKeyEquivalent:@"k"];
-		[clearTerminalMenuItem setKeyEquivalentModifierMask:NSCommandKeyMask];
+		[clearTerminalMenuItem setKeyEquivalentModifierMask:NSCommandKeyMask|NSShiftKeyMask];
 		[clearTerminalMenuItem setTarget:self];
 		
 		terminalItem = [[NSMenuItem alloc] initWithTitle:@"Terminal" action:NULL keyEquivalent:@""];

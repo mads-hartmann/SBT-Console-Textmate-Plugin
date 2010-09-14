@@ -142,7 +142,7 @@
 	NSFont *font = [output font];
 	NSString *size = [NSString stringWithFormat:@"%i", [font pointSize]];
 	NSColor * normalColor =nil;
-	NSData *normalDa	ta=[[NSUserDefaults standardUserDefaults] dataForKey:@"normalColor"];
+	NSData *normalData=[[NSUserDefaults standardUserDefaults] dataForKey:@"normalColor"];
 	if (normalData != nil){
 		normalColor =(NSColor *)[NSUnarchiver unarchiveObjectWithData:normalData];
 	}
