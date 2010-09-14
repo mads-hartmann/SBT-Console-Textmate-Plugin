@@ -141,7 +141,13 @@
 	
 	NSFont *font = [output font];
 	NSString *size = [NSString stringWithFormat:@"%i", [font pointSize]];
+	NSColor * normalColor =nil;
+	NSData *normalDa	ta=[[NSUserDefaults standardUserDefaults] dataForKey:@"normalColor"];
+	if (normalData != nil){
+		normalColor =(NSColor *)[NSUnarchiver unarchiveObjectWithData:normalData];
+	}
 	
+	[aString addAttribute:NSForegroundColorAttributeName value:normalColor range:NSMakeRange(0, [aString length])];
 	[aString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [aString length])];
 	[aString addAttribute:NSFontSizeAttribute value:size range:NSMakeRange(0, [aString length])];
 	
